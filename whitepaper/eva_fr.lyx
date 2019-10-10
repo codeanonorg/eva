@@ -24,15 +24,15 @@ algorithm2e
 \font_osf false
 \font_sf_scale 100 100
 \font_tt_scale 100 100
-\use_microtype false
+\use_microtype true
 \use_dash_ligatures true
 \graphics default
 \default_output_format default
 \output_sync 0
 \bibtex_command default
 \index_command default
-\float_placement tb
-\paperfontsize default
+\float_placement bp
+\paperfontsize 11
 \spacing single
 \use_hyperref true
 \pdf_subject "Un assembleur et VM pour les étudiants, par des étudiants"
@@ -47,7 +47,7 @@ algorithm2e
 \pdf_backref section
 \pdf_pdfusetitle true
 \papersize a4paper
-\use_geometry false
+\use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
@@ -72,17 +72,19 @@ algorithm2e
 \shortcut idx
 \color #008000
 \end_index
-\secnumdepth 2
-\tocdepth 1
+\leftmargin 5cm
+\rightmargin 4cm
+\secnumdepth 3
+\tocdepth 3
 \paragraph_separation indent
 \paragraph_indentation default
 \is_math_indent 0
 \math_numbering_side default
 \quotes_style french
 \dynamic_quotes 1
-\papercolumns 2
+\papercolumns 1
 \papersides 2
-\paperpagestyle headings
+\paperpagestyle default
 \tracking_changes false
 \output_changes false
 \html_math_output 0
@@ -123,13 +125,541 @@ LatexCommand tableofcontents
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset VSpace vfill
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Introduction
 \end_layout
 
 \begin_layout Standard
-L'assembleur est le langage le plus bas niveau, il est donc peut-être le
- langage le plus important
+Le langage assembleur constitue la première abstraction à la programmation
+ de circuits programmables.
+ Cela rend l'assembleur facile à apprendre et manipuler, mais difficile
+ à utiliser et maîtriser.
+ Face à l'état des choses, nous avons décidé de développer 
+\noun on
+Eva
+\noun default
+.
+\end_layout
+
+\begin_layout Standard
+Eva est une machine virtuelle développée par des étudiants pour les étudiants.
+ Simple et légère, elle offre un terrain d'expérimentation particulièrement
+ adapté à l'apprentissage de l'assembleur ou encore à l'écriture de compilateurs.
+ Son code source publique, clair et documenté la rendent accessible et facilemen
+t modifiable.
+ Eva est programmable dans un langage assembleur dédié facile d'accès et
+ doté d'un jeu d'instructions succinct mais complet.
+ Par ailleurs, l'implémentation d'Eva ainsi que de son assembleur est accessible
+ et reproductible facilement dans n'importe quel langage!
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace vfill
+\end_inset
+
+
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Éléments de conception
+\end_layout
+
+\begin_layout Standard
+La machine virtuelle doit être minimaliste pour être facilement implantable,
+ mais suffisamment puissante pour pouvoir être utile.
+ 
+\noun on
+Eva
+\noun default
+ étant conçue sur la base du 
+\begin_inset Quotes xld
+\end_inset
+
+retour aux fondamentaux
+\begin_inset Quotes xrd
+\end_inset
+
+, elle va à l'essentiel et propose un jeu d'instructions à la fois concis
+ et simple à prendre en main sans fonctionnalités superflue.
+ Nous avons décidé de partir sur un sous-ensemble des tableaux d'op-codes
+ de l'architecture ARM dont les op-codes sont donnés en 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "tab:opcodes"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="11" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Instruction
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Description
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+ADD
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Addition
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+ADC
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Addition avec retenue
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+BIC
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+RAZ de bit
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+CMP
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Comparaison
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+MOV
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Écriture de valeur dans le registre
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+B
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\emph on
+Branch Jump
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+BL
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\emph on
+Branch Link
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+PUSH
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Empiler
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+POP
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Dépiler
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+SUB
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Soustration avec retenue
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:opcodes"
+
+\end_inset
+
+Liste des op-codes de la machine virtuelle d'
+\noun on
+Eva
+\noun default
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Implantation de la machine virtuelle
+\end_layout
+
+\begin_layout Standard
+Afin d'aider au développement du projet, 
+\noun on
+Eva
+\noun default
+ va être implantée en C (norme 99) et doit ne dépendre d'aucun code source
+ étranger au projet, autre que la librairie standard.
+ Une telle contrainte assure que l'implantation soit élémentaire, le code
+ source portable, et la compilation relativement simple.
+\end_layout
+
+\begin_layout Standard
+Du fait de cette implantation minimale et de la maintenabilité du code source,
+ le but d'
+\noun on
+Eva
+\noun default
+, en plus d'être pédagogique, est d'être stable et fiable.
+ De plus, l'aspect sécurité est d'une grande importance pour le projet,
+ où une correction de code aura toujours une priorité plus importante que
+ l'ajout d'une nouvelle fonctionnalité.
+\end_layout
+
+\begin_layout Section
+Disponibilité du projet
+\end_layout
+
+\begin_layout Standard
+
+\noun on
+Eva
+\noun default
+ est un projet publique, dont le code et les binaires seront accessibles
+ en open-source, suivant une licence MIT.
+ Cela veut dire que n'importe quel utilisateur peut télécharger, lire et
+ modifier le code source.
+ Le projet étant pédagogique, il va de soit que chaque facette du projet
+ soit publique et disponible au plus grand nombre.
+\end_layout
+
+\begin_layout Section
+Projets connexes
+\end_layout
+
+\begin_layout Standard
+En plus du développement de la machine virtuelle, 
+\noun on
+Eva
+\noun default
+ va être la base de plusieurs projets amenant à implanter des compilateurs
+ ciblant 
+\noun on
+Eva
+\noun default
+, notamment d'un langage de programmation propre à la machine virtuelle,
+ conçue de toute pièce par l'équipe
+\noun on
+ Eva
+\noun default
+.
+ De plus, des outils de débogage sont prévus pour aider au développement
+ d'applications ciblant la machine virtuelle 
+\noun on
+Eva
+\noun default
+.
 \end_layout
 
 \end_body
