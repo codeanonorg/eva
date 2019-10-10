@@ -1,5 +1,7 @@
 # jeu d'instruction minimal pour EVA
 
+⚠︎ En cours de construction ⚠︎
+
 | Instruction |  |
 | :------ | :----- |
 | **ADD** | addition
@@ -14,6 +16,7 @@
 | **SUB** | soustraction |
 | **SUBC** | soustraction avec retenue |
 
+
 # paramètres par défaut
 
 + **mémoire**   : 512 mo
@@ -27,3 +30,7 @@
   + R15 : _program counter_ [pc]
   + R16 : _flags_
 
+
+# Mannuel ARM :
+
+[lien](https://static.docs.arm.com/ddi0487/ea/DDI0487E_a_armv8_arm.pdf?_ga=2.251000774.1352180834.1570687704-561539479.1566997689)
