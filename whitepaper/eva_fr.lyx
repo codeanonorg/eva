@@ -607,8 +607,8 @@ Eva
 \end_layout
 
 \begin_layout Standard
-Cette implantation minimal va de paire avec l'idéologie derrière Eva : prioriser
- l'accessibilité et la fiabilité.
+Cette implantation minimale va de paire avec l'idéologie derrière Eva :
+ prioriser l'accessibilité et la fiabilité.
  De plus, l'aspect sécurité est d'une grande importance pour le projet,
  où la correction de code aura toujours priorité sur l'ajout de nouvelles
  fonctionnalités.
