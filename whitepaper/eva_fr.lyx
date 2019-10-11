@@ -177,7 +177,9 @@ t modifiable.
 
 \begin_layout Standard
 La machine virtuelle doit être minimaliste pour être facilement implantable,
- mais suffisamment puissante pour pouvoir être utile.
+ simple à programmer pour rester accessible aux étudiants désireux d'apprendre,
+ mais également suffisament performante pour supporter le développement
+ d'applications en vrai grandeur.
  
 \noun on
 Eva
@@ -192,8 +194,8 @@ retour aux fondamentaux
 
 , elle va à l'essentiel et propose un jeu d'instructions à la fois concis
  et simple à prendre en main sans fonctionnalités superflue.
- Nous avons décidé de partir sur un sous-ensemble des tableaux d'op-codes
- de l'architecture ARM dont les op-codes sont donnés en 
+ Nous avons à ces fins séléctionné un sous-ensemble des instructions ARM
+ 
 \begin_inset CommandInset ref
 LatexCommand formatted
 reference "tab:opcodes"
@@ -550,7 +552,6 @@ SUB
 \noun off
 \color none
 Soustration avec retenue
-
 \end_layout
 
 \end_inset
@@ -600,21 +601,17 @@ Afin d'aider au développement du projet,
 Eva
 \noun default
  va être implantée en C (norme 99) et doit ne dépendre d'aucun code source
- étranger au projet, autre que la librairie standard.
+ autre que la librairie standard.
  Une telle contrainte assure que l'implantation soit élémentaire, le code
- source portable, et la compilation relativement simple.
+ source portable, et la compilation aisée.
 \end_layout
 
 \begin_layout Standard
-Du fait de cette implantation minimale et de la maintenabilité du code source,
- le but d'
-\noun on
-Eva
-\noun default
-, en plus d'être pédagogique, est d'être stable et fiable.
+Cette implantation minimal va de paire avec l'idéologie derrière Eva : prioriser
+ l'accessibilité et la fiabilité.
  De plus, l'aspect sécurité est d'une grande importance pour le projet,
- où une correction de code aura toujours une priorité plus importante que
- l'ajout d'une nouvelle fonctionnalité.
+ où la correction de code aura toujours priorité sur l'ajout de nouvelles
+ fonctionnalités.
 \end_layout
 
 \begin_layout Section
@@ -643,23 +640,12 @@ En plus du développement de la machine virtuelle,
 \noun on
 Eva
 \noun default
- va être la base de plusieurs projets amenant à implanter des compilateurs
- ciblant 
-\noun on
-Eva
-\noun default
-, notamment d'un langage de programmation propre à la machine virtuelle,
- conçue de toute pièce par l'équipe
-\noun on
- Eva
-\noun default
-.
- De plus, des outils de débogage sont prévus pour aider au développement
- d'applications ciblant la machine virtuelle 
-\noun on
-Eva
-\noun default
-.
+ sera également le socle de plusieurs projets dont divers compilateurs ciblant
+ EVA.
+ Parmis ces compilateurs l'équipe d'EVA développera et maintiendra un langage
+ de programmation de haut niveau spécifique à EVA.
+ Ce dernier permetra de complémenter les possibilités offertes par le simple
+ langage assembleur supporté nativement par la platteforme.
 \end_layout
 
 \end_body
