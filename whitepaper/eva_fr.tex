@@ -6,7 +6,8 @@
 \usepackage{beramono}
 \usepackage{eulervm}
 \usepackage[T1]{fontenc}
-\usepackage[latin9]{inputenc}
+\usepackage[utf8]{inputenc}
+% \usepackage[latin1]{inputenc}
 \usepackage[a4paper]{geometry}
 \geometry{verbose,lmargin=5cm,rmargin=4cm}
 \usepackage{color}
@@ -26,7 +27,7 @@
  breaklinks=true,pdfborder={0 0 0},pdfborderstyle={},backref=section,colorlinks=true]
  {hyperref}
 \hypersetup{
- pdfsubject={Un assembleur et VM pour les étudiants, par des étudiants},
+ pdfsubject={Un assembleur et VM pour les Ã©tudiants, par des Ã©tudiants},
  pdfkeywords={asm,assembleur,vm}}
 
 \makeatletter
@@ -67,33 +68,33 @@
 
 \section{Introduction}
 
-Le langage assembleur constitue la première abstraction à la programmation
-de circuits programmables. Cela rend l'assembleur facile à apprendre
-et manipuler, mais difficile à utiliser et maîtriser. Face à l'état
-des choses, nous avons décidé de développer \noun{Eva}.
+Le langage assembleur constitue la premiÃ¨re abstraction Ã  la programmation
+de circuits programmables. Cela rend l'assembleur facile Ã  apprendre
+et manipuler, mais difficile Ã  utiliser et maÃ®triser. Face Ã  l'Ã©tat
+des choses, nous avons dÃ©cidÃ© de dÃ©velopper \noun{Eva}.
 
-Eva est une machine virtuelle développée par des étudiants pour les
-étudiants. Simple et légère, elle offre un terrain d'expérimentation
-particulièrement adapté à l'apprentissage de l'assembleur ou encore
-à l'écriture de compilateurs. Son code source publique, clair et documenté
+Eva est une machine virtuelle dÃ©veloppÃ©e par des Ã©tudiants pour les
+Ã©tudiants. Simple et lÃ©gÃ¨re, elle offre un terrain d'expÃ©rimentation
+particuliÃ¨rement adaptÃ© Ã  l'apprentissage de l'assembleur ou encore
+Ã  l'Ã©criture de compilateurs. Son code source publique, clair et documentÃ©
 la rendent accessible et facilement modifiable. Eva est programmable
-dans un langage assembleur dédié facile d'accès et doté d'un jeu d'instructions
-succinct mais complet. Par ailleurs, l'implémentation d'Eva ainsi
+dans un langage assembleur dÃ©diÃ© facile d'accÃ¨s et dotÃ© d'un jeu d'instructions
+succinct mais complet. Par ailleurs, l'implÃ©mentation d'Eva ainsi
 que de son assembleur est accessible et reproductible facilement dans
 n'importe quel langage!
 
 \vfill{}
 \newpage{}
 
-\section{Éléments de conception}
+\section{Ã‰lÃ©ments de conception}
 
-La machine virtuelle doit être minimaliste pour être facilement implantable,
-simple à programmer pour rester accessible aux étudiants désireux
-d'apprendre, mais également suffisament performante pour supporter
-le développement d'applications en vrai grandeur. \noun{Eva} étant
-conçue sur la base du \og retour aux fondamentaux\fg , elle va à l'essentiel
-et propose un jeu d'instructions à la fois concis et simple à prendre
-en main sans fonctionnalités superflue. Nous avons à ces fins séléctionné
+La machine virtuelle doit Ãªtre minimaliste pour Ãªtre facilement implantable,
+simple Ã  programmer pour rester accessible aux Ã©tudiants dÃ©sireux
+d'apprendre, mais Ã©galement suffisament performante pour supporter
+le dÃ©veloppement d'applications en vrai grandeur. \noun{Eva} Ã©tant
+conÃ§ue sur la base du \og retour aux fondamentaux\fg , elle va Ã  l'essentiel
+et propose un jeu d'instructions Ã  la fois concis et simple Ã  prendre
+en main sans fonctionnalitÃ©s superflue. Nous avons Ã  ces fins sÃ©lÃ©ctionnÃ©
 un sous-ensemble des instructions ARM \tabref{opcodes}.
 \begin{table}[bp]
 \begin{centering}
@@ -110,7 +111,7 @@ un sous-ensemble des instructions ARM \tabref{opcodes}.
 \hline 
 \textbf{CMP} & Comparaison\tabularnewline
 \hline 
-\textbf{MOV} & Écriture de valeur dans le registre\tabularnewline
+\textbf{MOV} & Ã‰criture de valeur dans le registre\tabularnewline
 \hline 
 \textbf{B} & \emph{Branch Jump}\tabularnewline
 \hline 
@@ -118,7 +119,7 @@ un sous-ensemble des instructions ARM \tabref{opcodes}.
 \hline 
 \textbf{PUSH} & Empiler\tabularnewline
 \hline 
-\textbf{POP} & Dépiler\tabularnewline
+\textbf{POP} & DÃ©piler\tabularnewline
 \hline 
 \textbf{SUB} & Soustration avec retenue\tabularnewline
 \hline 
@@ -130,30 +131,30 @@ un sous-ensemble des instructions ARM \tabref{opcodes}.
 
 \section{Implantation de la machine virtuelle}
 
-Afin d'aider au développement du projet, \noun{Eva} va être implantée
-en C (norme 99) et doit ne dépendre d'aucun code source autre que
+Afin d'aider au dÃ©veloppement du projet, \noun{Eva} va Ãªtre implantÃ©e
+en C (norme 99) et doit ne dÃ©pendre d'aucun code source autre que
 la librairie standard. Une telle contrainte assure que l'implantation
-soit élémentaire, le code source portable, et la compilation aisée.
+soit Ã©lÃ©mentaire, le code source portable, et la compilation aisÃ©e.
 
-Cette implantation minimale va de paire avec l'idéologie derrière
-Eva : prioriser l'accessibilité et la fiabilité. De plus, l'aspect
-sécurité est d'une grande importance pour le projet, où la correction
-de code aura toujours priorité sur l'ajout de nouvelles fonctionnalités.
+Cette implantation minimale va de paire avec l'idÃ©ologie derriÃ¨re
+Eva : prioriser l'accessibilitÃ© et la fiabilitÃ©. De plus, l'aspect
+sÃ©curitÃ© est d'une grande importance pour le projet, oÃ¹ la correction
+de code aura toujours prioritÃ© sur l'ajout de nouvelles fonctionnalitÃ©s.
 
-\section{Disponibilité du projet}
+\section{DisponibilitÃ© du projet}
 
 \noun{Eva} est un projet publique, dont le code et les binaires seront
 accessibles en open-source, suivant une licence MIT. Cela veut dire
-que n'importe quel utilisateur peut télécharger, lire et modifier
-le code source. Le projet étant pédagogique, il va de soit que chaque
+que n'importe quel utilisateur peut tÃ©lÃ©charger, lire et modifier
+le code source. Le projet Ã©tant pÃ©dagogique, il va de soit que chaque
 facette du projet soit publique et disponible au plus grand nombre.
 
 \section{Projets connexes}
 
-En plus du développement de la machine virtuelle, \noun{Eva} sera
-également le socle de plusieurs projets dont divers compilateurs ciblant
-EVA. Parmis ces compilateurs l'équipe d'EVA développera et maintiendra
-un langage de programmation de haut niveau spécifique à EVA. Ce dernier
-permetra de complémenter les possibilités offertes par le simple langage
-assembleur supporté nativement par la platteforme.
+En plus du dÃ©veloppement de la machine virtuelle, \noun{Eva} sera
+Ã©galement le socle de plusieurs projets dont divers compilateurs ciblant
+EVA. Parmis ces compilateurs l'Ã©quipe d'EVA dÃ©veloppera et maintiendra
+un langage de programmation de haut niveau spÃ©cifique Ã  EVA. Ce dernier
+permetra de complÃ©menter les possibilitÃ©s offertes par le simple langage
+assembleur supportÃ© nativement par la platteforme.
 \end{document}
