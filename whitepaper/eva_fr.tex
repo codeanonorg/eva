@@ -1,0 +1,159 @@
+%% LyX 2.3.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[11pt,twoside,french]{article}
+\usepackage{beraserif}
+\usepackage{berasans}
+\usepackage{beramono}
+\usepackage{eulervm}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[a4paper]{geometry}
+\geometry{verbose,lmargin=5cm,rmargin=4cm}
+\usepackage{color}
+\usepackage{babel}
+\makeatletter
+\addto\extrasfrench{%
+   \providecommand{\og}{\leavevmode\flqq~}%
+   \providecommand{\fg}{\ifdim\lastskip>\z@\unskip\fi~\frqq}%
+}
+
+\makeatother
+\usepackage{refstyle}
+\usepackage{algorithm2e}
+\usepackage{microtype}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=true,bookmarksopen=false,
+ breaklinks=true,pdfborder={0 0 0},pdfborderstyle={},backref=section,colorlinks=true]
+ {hyperref}
+\hypersetup{
+ pdfsubject={Un assembleur et VM pour les étudiants, par des étudiants},
+ pdfkeywords={asm,assembleur,vm}}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+
+\AtBeginDocument{\providecommand\tabref[1]{\ref{tab:#1}}}
+\newcommand{\noun}[1]{\textsc{#1}}
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+\RS@ifundefined{subsecref}
+  {\newref{subsec}{name = \RSsectxt}}
+  {}
+\RS@ifundefined{thmref}
+  {\def\RSthmtxt{theorem~}\newref{thm}{name = \RSthmtxt}}
+  {}
+\RS@ifundefined{lemref}
+  {\def\RSlemtxt{lemma~}\newref{lem}{name = \RSlemtxt}}
+  {}
+
+
+\@ifundefined{date}{}{\date{}}
+\makeatother
+
+\begin{document}
+\title{EVA}
+\author{Association CodeAnon}
+
+\maketitle
+\clearpage{}
+
+\tableofcontents{}
+
+\cleardoublepage{}
+
+\vfill{}
+
+
+\section{Introduction}
+
+Le langage assembleur constitue la première abstraction à la programmation
+de circuits programmables. Cela rend l'assembleur facile à apprendre
+et manipuler, mais difficile à utiliser et maîtriser. Face à l'état
+des choses, nous avons décidé de développer \noun{Eva}.
+
+Eva est une machine virtuelle développée par des étudiants pour les
+étudiants. Simple et légère, elle offre un terrain d'expérimentation
+particulièrement adapté à l'apprentissage de l'assembleur ou encore
+à l'écriture de compilateurs. Son code source publique, clair et documenté
+la rendent accessible et facilement modifiable. Eva est programmable
+dans un langage assembleur dédié facile d'accès et doté d'un jeu d'instructions
+succinct mais complet. Par ailleurs, l'implémentation d'Eva ainsi
+que de son assembleur est accessible et reproductible facilement dans
+n'importe quel langage!
+
+\vfill{}
+\newpage{}
+
+\section{Éléments de conception}
+
+La machine virtuelle doit être minimaliste pour être facilement implantable,
+simple à programmer pour rester accessible aux étudiants désireux
+d'apprendre, mais également suffisament performante pour supporter
+le développement d'applications en vrai grandeur. \noun{Eva} étant
+conçue sur la base du \og retour aux fondamentaux\fg , elle va à l'essentiel
+et propose un jeu d'instructions à la fois concis et simple à prendre
+en main sans fonctionnalités superflue. Nous avons à ces fins séléctionné
+un sous-ensemble des instructions ARM \tabref{opcodes}.
+\begin{table}[bp]
+\begin{centering}
+\begin{tabular}{|c|l|}
+\hline 
+\textbf{Instruction} & \textbf{Description}\tabularnewline
+\hline 
+\hline 
+\textbf{ADD} & Addition\tabularnewline
+\hline 
+\textbf{ADC} & Addition avec retenue\tabularnewline
+\hline 
+\textbf{BIC} & RAZ de bit\tabularnewline
+\hline 
+\textbf{CMP} & Comparaison\tabularnewline
+\hline 
+\textbf{MOV} & Écriture de valeur dans le registre\tabularnewline
+\hline 
+\textbf{B} & \emph{Branch Jump}\tabularnewline
+\hline 
+\textbf{BL} & \emph{Branch Link}\tabularnewline
+\hline 
+\textbf{PUSH} & Empiler\tabularnewline
+\hline 
+\textbf{POP} & Dépiler\tabularnewline
+\hline 
+\textbf{SUB} & Soustration avec retenue\tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+\caption{\label{tab:opcodes}Liste des op-codes de la machine virtuelle d'\noun{Eva}.}
+\end{table}
+
+
+\section{Implantation de la machine virtuelle}
+
+Afin d'aider au développement du projet, \noun{Eva} va être implantée
+en C (norme 99) et doit ne dépendre d'aucun code source autre que
+la librairie standard. Une telle contrainte assure que l'implantation
+soit élémentaire, le code source portable, et la compilation aisée.
+
+Cette implantation minimale va de paire avec l'idéologie derrière
+Eva : prioriser l'accessibilité et la fiabilité. De plus, l'aspect
+sécurité est d'une grande importance pour le projet, où la correction
+de code aura toujours priorité sur l'ajout de nouvelles fonctionnalités.
+
+\section{Disponibilité du projet}
+
+\noun{Eva} est un projet publique, dont le code et les binaires seront
+accessibles en open-source, suivant une licence MIT. Cela veut dire
+que n'importe quel utilisateur peut télécharger, lire et modifier
+le code source. Le projet étant pédagogique, il va de soit que chaque
+facette du projet soit publique et disponible au plus grand nombre.
+
+\section{Projets connexes}
+
+En plus du développement de la machine virtuelle, \noun{Eva} sera
+également le socle de plusieurs projets dont divers compilateurs ciblant
+EVA. Parmis ces compilateurs l'équipe d'EVA développera et maintiendra
+un langage de programmation de haut niveau spécifique à EVA. Ce dernier
+permetra de complémenter les possibilités offertes par le simple langage
+assembleur supporté nativement par la platteforme.
+\end{document}
