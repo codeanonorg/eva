@@ -7,7 +7,6 @@
 \usepackage{eulervm}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-% \usepackage[latin1]{inputenc}
 \usepackage[a4paper]{geometry}
 \geometry{verbose,lmargin=5cm,rmargin=4cm}
 \usepackage{color}
@@ -38,19 +37,7 @@
 \newcommand{\noun}[1]{\textsc{#1}}
 %% Because html converters don't know tabularnewline
 \providecommand{\tabularnewline}{\\}
-\RS@ifundefined{subsecref}
-  {\newref{subsec}{name = \RSsectxt}}
-  {}
-\RS@ifundefined{thmref}
-  {\def\RSthmtxt{theorem~}\newref{thm}{name = \RSthmtxt}}
-  {}
-\RS@ifundefined{lemref}
-  {\def\RSlemtxt{lemma~}\newref{lem}{name = \RSlemtxt}}
-  {}
 
-
-\@ifundefined{date}{}{\date{}}
-\makeatother
 
 \begin{document}
 \title{EVA}
@@ -157,4 +144,5 @@ EVA. Parmis ces compilateurs l'équipe d'EVA développera et maintiendra
 un langage de programmation de haut niveau spécifique à EVA. Ce dernier
 permetra de complémenter les possibilités offertes par le simple langage
 assembleur supporté nativement par la platteforme.
+
 \end{document}
