@@ -4,7 +4,8 @@
 \usepackage{beramono}
 \usepackage{eulervm}
 \usepackage[T1]{fontenc}
-\usepackage[latin9]{inputenc}
+\usepackage[utf8]{inputenc}
+% \usepackage[latin1]{inputenc}
 \usepackage[a4paper]{geometry}
 \geometry{verbose,lmargin=5cm,rmargin=4cm}
 \usepackage{color}
@@ -51,13 +52,13 @@ de circuits programmables. Cela rend l'assembleur facile à apprendre
 et manipuler, mais difficile à utiliser et maîtriser. Face à l'état
 des choses, nous avons décidé de développer \noun{Eva}.
 
-\noun{Eva} est une machine virtuelle développée par des étudiants pour les
+Eva est une machine virtuelle développée par des étudiants pour les
 étudiants. Simple et légère, elle offre un terrain d'expérimentation
 particulièrement adapté à l'apprentissage de l'assembleur ou encore
 à l'écriture de compilateurs. Son code source publique, clair et documenté
-la rendent accessible et facilement modifiable. \noun{Eva} est programmable
+la rendent accessible et facilement modifiable. Eva est programmable
 dans un langage assembleur dédié facile d'accès et doté d'un jeu d'instructions
-succinct mais complet. Par ailleurs, l'implémentation d'\noun{Eva} ainsi
+succinct mais complet. Par ailleurs, l'implémentation d'Eva ainsi
 que de son assembleur est accessible et reproductible facilement dans
 n'importe quel langage!
 
@@ -67,12 +68,13 @@ n'importe quel langage!
 \section{Éléments de conception}
 
 La machine virtuelle doit être minimaliste pour être facilement implantable,
-mais suffisamment puissante pour pouvoir être utile. \noun{Eva} étant
+simple à programmer pour rester accessible aux étudiants désireux
+d'apprendre, mais également suffisament performante pour supporter
+le développement d'applications en vrai grandeur. \noun{Eva} étant
 conçue sur la base du \og retour aux fondamentaux\fg , elle va à l'essentiel
 et propose un jeu d'instructions à la fois concis et simple à prendre
-en main sans fonctionnalités superflue. Nous avons décidé de partir
-sur un sous-ensemble des tableaux d'op-codes de l'architecture ARM
-dont les op-codes sont donnés en \tabref{opcodes}.
+en main sans fonctionnalités superflue. Nous avons à ces fins séléctionné
+un sous-ensemble des instructions ARM \tabref{opcodes}.
 \begin{table}[bp]
 \begin{centering}
 \begin{tabular}{|c|l|}
@@ -109,16 +111,14 @@ dont les op-codes sont donnés en \tabref{opcodes}.
 \section{Implantation de la machine virtuelle}
 
 Afin d'aider au développement du projet, \noun{Eva} va être implantée
-en C (norme 99) et doit ne dépendre d'aucun code source étranger au
-projet, autre que la librairie standard. Une telle contrainte assure
-que l'implantation soit élémentaire, le code source portable, et la
-compilation relativement simple.
+en C (norme 99) et doit ne dépendre d'aucun code source autre que
+la librairie standard. Une telle contrainte assure que l'implantation
+soit élémentaire, le code source portable, et la compilation aisée.
 
-Du fait de cette implantation minimale et de la maintenabilité du
-code source, le but d'\noun{Eva}, en plus d'être pédagogique, est
-d'être stable et fiable. De plus, l'aspect sécurité est d'une grande
-importance pour le projet, où une correction de code aura toujours
-une priorité plus importante que l'ajout d'une nouvelle fonctionnalité.
+Cette implantation minimale va de paire avec l'idéologie derrière
+Eva : prioriser l'accessibilité et la fiabilité. De plus, l'aspect
+sécurité est d'une grande importance pour le projet, où la correction
+de code aura toujours priorité sur l'ajout de nouvelles fonctionnalités.
 
 \section{Disponibilité du projet}
 
@@ -130,10 +130,10 @@ facette du projet soit publique et disponible au plus grand nombre.
 
 \section{Projets connexes}
 
-En plus du développement de la machine virtuelle, \noun{Eva} va être
-la base de plusieurs projets amenant à implanter des compilateurs
-ciblant \noun{Eva}, notamment d'un langage de programmation propre
-à la machine virtuelle, conçue de toute pièce par l'équipe \noun{Eva}.
-De plus, des outils de débogage sont prévus pour aider au développement
-d'applications ciblant la machine virtuelle \noun{Eva}.
+En plus du développement de la machine virtuelle, \noun{Eva} sera
+également le socle de plusieurs projets dont divers compilateurs ciblant
+\noun{Eva}. Parmis ces compilateurs l'équipe d'\noun{Eva} développera et maintiendra
+un langage de programmation de haut niveau spécifique à \noun{Eva}. Ce dernier
+permetra de complémenter les possibilités offertes par le simple langage
+assembleur supporté nativement par la platteforme.
 \end{document}
