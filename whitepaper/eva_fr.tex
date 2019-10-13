@@ -1,4 +1,3 @@
-
 %% LyX 2.3.3 created this file.  For more info, see http://www.lyx.org/.
 %% Do not edit unless you really know what you are doing.
 \documentclass[11pt,twoside,french]{article}
@@ -7,7 +6,7 @@
 \usepackage{beramono}
 \usepackage{eulervm}
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
+\usepackage[latin9]{inputenc}
 \usepackage[a4paper]{geometry}
 \geometry{verbose,lmargin=5cm,rmargin=4cm}
 \usepackage{color}
@@ -68,20 +67,6 @@
 
 \section{Introduction}
 
-<<<<<<< HEAD
-Le langage assembleur constitue la premiÃ¨re abstraction Ã  la programmation
-de circuits programmables. Cela rend l'assembleur facile Ã  apprendre
-et manipuler, mais difficile Ã  utiliser et maÃ®triser. Face Ã  l'Ã©tat
-des choses, nous avons dÃ©cidÃ© de dÃ©velopper \noun{Eva}.
-
-\noun{Eva} est une machine virtuelle dÃ©veloppÃ©e par des Ã©tudiants pour les
-Ã©tudiants. Simple et lÃ©gÃ¨re, elle offre un terrain d'expÃ©rimentation
-particuliÃ¨rement adaptÃ© Ã  l'apprentissage de l'assembleur ou encore
-Ã  l'Ã©criture de compilateurs. Son code source publique, clair et documentÃ©
-la rendent accessible et facilement modifiable. \noun{Eva} est programmable
-dans un langage assembleur dÃ©diÃ© facile d'accÃ¨s et dotÃ© d'un jeu d'instructions
-succinct mais complet. Par ailleurs, l'implÃ©mentation d'\noun{Eva} ainsi
-=======
 Le langage assembleur constitue la première abstraction à la programmation
 de circuits programmables. Cela rend l'assembleur facile à apprendre
 et manipuler, mais difficile à utiliser et maîtriser. Face à l'état
@@ -94,13 +79,11 @@ particulièrement adapté à l'apprentissage de l'assembleur ou encore
 la rendent accessible et facilement modifiable. Eva est programmable
 dans un langage assembleur dédié facile d'accès et doté d'un jeu d'instructions
 succinct mais complet. Par ailleurs, l'implémentation d'Eva ainsi
->>>>>>> feature/whitepaper-fix
 que de son assembleur est accessible et reproductible facilement dans
 n'importe quel langage!
 
 \vfill{}
 \newpage{}
-
 
 \section{Éléments de conception}
 
@@ -127,11 +110,7 @@ un sous-ensemble des instructions ARM \tabref{opcodes}.
 \hline 
 \textbf{CMP} & Comparaison\tabularnewline
 \hline 
-<<<<<<< HEAD
-\textbf{MOV} & Ã‰criture de valeur dans le registre\tabularnewline
-=======
 \textbf{MOV} & Écriture de valeur dans le registre\tabularnewline
->>>>>>> feature/whitepaper-fix
 \hline 
 \textbf{B} & \emph{Branch Jump}\tabularnewline
 \hline 
@@ -139,7 +118,6 @@ un sous-ensemble des instructions ARM \tabref{opcodes}.
 \hline 
 \textbf{PUSH} & Empiler\tabularnewline
 \hline 
-
 \textbf{POP} & Dépiler\tabularnewline
 \hline 
 \textbf{SUB} & Soustration avec retenue\tabularnewline
@@ -151,7 +129,6 @@ un sous-ensemble des instructions ARM \tabref{opcodes}.
 
 
 \section{Implantation de la machine virtuelle}
-
 
 Afin d'aider au développement du projet, \noun{Eva} va être implantée
 en C (norme 99) et doit ne dépendre d'aucun code source autre que
@@ -172,7 +149,6 @@ le code source. Le projet étant pédagogique, il va de soit que chaque
 facette du projet soit publique et disponible au plus grand nombre.
 
 \section{Projets connexes}
-
 
 En plus du développement de la machine virtuelle, \noun{Eva} sera
 également le socle de plusieurs projets dont divers compilateurs ciblant
