@@ -92,19 +92,19 @@ L'ensemble du projet Eva se compose de plusieurs outils \ref{fig:diagram1}).
 
 \end{itemize}
 
-\begin{figure}[b]
+\begin{figure}[p]
   \centering
-  \textbf{WARNING}: Changer le nom du graphe pour éviter qu'il soit ignoré par git
-  \includegraphics[height=10cm, keepaspectratio]{diagram1_graph.pdf}
+  \includegraphics[width=12cm, height=12cm, keepaspectratio]{diagram1_graph.pdf}
   \caption{Structure de la machine virtuelle \noun{Eva}}
   \label{fig:diagram1}
 \end{figure}
 
+
 \section{Éléments de conception}
 
-La machine virtuelle doit être minimaliste pour que la compréhension de son fonctionnement soit accessible, simple à programmer pour rester accessible aux étudiants désireux d'apprendre, mais également suffisamment performante pour supporter le développement d'applications en vrai grandeur. \noun{Eva} étant conçue sur la base du \og retour aux fondamentaux\fg , elle va donc à l'essentiel et propose un jeu d'instructions à la fois concis et simple à prendre en main sans fonctionnalités superflue. Nous avons à ces fins sélectionné un sous-ensemble des instructions ARM \tabref{opcodes}.
+La machine virtuelle doit être minimaliste pour que la compréhension de son fonctionnement soit accessible, simple à programmer pour rester accessible aux étudiants désireux d'apprendre, mais également suffisamment performante pour supporter le développement d'applications en vrai grandeur. \noun{Eva} étant conçue sur la base du \og retour aux fondamentaux\fg , elle va donc à l'essentiel et propose un jeu d'instructions à la fois concis et simple à prendre en main sans fonctionnalités superflue. Nous avons à ces fins sélectionné un sous-ensemble des instructions ARM \ref{tab:opcodes}.
 
-\begin{table}[bp]
+\begin{table}[p]
 \begin{centering}
 \begin{tabular}{|c|l|}
 \hline
@@ -133,12 +133,7 @@ La machine virtuelle doit être minimaliste pour que la compréhension de son fo
 \hline
 \end{tabular}
 \par\end{centering}
-<<<<<<< HEAD
 \caption{\label{tab:opcodes}Liste des instructions de la machine virtuelle d'\noun{Eva}.}
-=======
-\caption{Liste des op-codes de la machine virtuelle d'\noun{Eva}.}
-\label{tab:opcodes}
->>>>>>> 13513c6f671df2b3b3af5198e424c0f0d1172f38
 \end{table}
 
 
@@ -172,6 +167,8 @@ permettra de complémenter les possibilités offertes par le simple langage
 assembleur supporté nativement par la plate-forme.
 
 \newpage{}
+
+\clearpage{}
 
 \begin{thebibliography}{XXXXXX}
 \label{chap:bib}
