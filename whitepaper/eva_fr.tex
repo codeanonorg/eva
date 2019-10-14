@@ -1,6 +1,7 @@
 \documentclass[11pt,twoside,french]{article}
 \usepackage{beraserif}
 \usepackage{berasans}
+\usepackage{graphicx}
 \usepackage{beramono}
 \usepackage{eulervm}
 \usepackage[T1]{fontenc}
@@ -37,33 +38,47 @@
 
 \maketitle
 \clearpage{}
-
 \tableofcontents{}
-
 \cleardoublepage{}
-
 \vfill{}
 
+\section{Remarque préliminaire}
+
+Ce document est écris au présent. Il n'en reste pas moins une projection de ce que sera Eva au terme de son développement. Il faut donc le lire comme une description détaillée du projet final Eva et non comme une description de son état actuel.
+
+\cleardoublepage{}
 
 \section{Introduction}
 
 Le langage assembleur constitue la première abstraction à la programmation
-de circuits programmables. Cela rend l'assembleur facile à apprendre
-et manipuler, mais difficile à utiliser et maîtriser. Face à l'état
-des choses, nous avons décidé de développer \noun{Eva}.
+de circuits programmables. Aussi son apprentissage est une étape fondamentale pour l'étudiant curieux de comprendre le fonctionnement des ordinateurs. Mais d'autres applications nécessitent une bonne connaissance des langages d'assemblage. L'écriture des compilateurs par exemple repose assez largement sur une connaissance fine des différentes architectures existantes (ARM, elf, x86 ...) et des langages d'assemblage qui leurs sont associés. \\
 
-Eva est une machine virtuelle développée par des étudiants pour les
-étudiants. Simple et légère, elle offre un terrain d'expérimentation
-particulièrement adapté à l'apprentissage de l'assembleur ou encore
-à l'écriture de compilateurs. Son code source publique, clair et documenté
-la rendent accessible et facilement modifiable. Eva est programmable
-dans un langage assembleur dédié facile d'accès et doté d'un jeu d'instructions
-succinct mais complet. Par ailleurs, l'implémentation d'Eva ainsi
-que de son assembleur est accessible et reproductible facilement dans
-n'importe quel langage!
+Comment alors permettre aux étudiants désireux de s'initier à l'écriture de compilateur ou d'applications très bas niveau de réaliser leurs projets ? Face à l'étendue des architectures à cibler, à la compléxité de certaines d'entres elles, ce type de projet peut rapidement devenir compliqué. Bien sur, des alternatives existent déjà. On peut citer le fameux ouvrage Structure And interpretation of Computer Programs \cite{SICP} qui propose en dernier chapitre l'implémentation d'une machine abstraite programmable dans un langage d'assemblage simple. D'autres projets comme la machine virtuelle CHIP8 sont des sources intéressantes pour découvrir la programmation assembleur \cite{CHIP8}. Ces outils déjà utilisés dans le but de rendre accessible aux étudiants les thématiques dites de "bas niveaux" restent néanmoins très spécifiques et limitent grandement le champs des possibles. C'est à ce carrefour entre facilité d'apprentissage et possibilités offertes; ce delta entre outil pédagogique et problèmes en tailles réélles qu'essaye de s'intercaler le projet \noun{Eva}. \\
 
 \vfill{}
 \newpage{}
+
+\section{Eva}
+
+\noun{Eva} est une machine virtuelle développée par des étudiants pour les
+étudiants. Simple et légère, elle offre un terrain d'expérimentation
+particulièrement adapté à l'apprentissage de l'assembleur ou encore
+à l'écriture de compilateurs. Son code source publique, clair et documenté
+la rendent accessible et facilement modifiable. \noun{Eva} est programmable
+dans un langage assembleur dédié facile d'accès et doté d'un jeu d'instructions
+succinct mais complet. Par complet nous entendons informellement "suffisant pour permettre d'implanter une application incluant des entrées, des sorties et eventuellement des fonctions de réseaux ou d'affichage graphique". Nous reviendrons en détail sur ce point dans la suite du document.
+
+\vfill{}
+
+\section{Description technique}
+
+\begin{figure}[h!]
+  \includegraphics[height=10cm, keepaspectratio]{diagram1.pdf}
+  \caption{\label{fig:diagram1} Structure de la machine virtuelle Eva}
+\end{figure}
+
+\vfill{}
+
 
 \section{Éléments de conception}
 
@@ -136,5 +151,19 @@ EVA. Parmis ces compilateurs l'équipe d'EVA développera et maintiendra
 un langage de programmation de haut niveau spécifique à EVA. Ce dernier
 permetra de complémenter les possibilités offertes par le simple langage
 assembleur supporté nativement par la platteforme.
+
+
+\newpage{}
+
+\begin{thebibliography}{XXXXXX}
+\label{chap:bib}
+
+\bibitem{SICP} Harold Abelson and Gerald Jay Sussman
+\emph{Structure and Interpretation of Computer Programs} MIT, 1996
+
+\bibitem{CHIP8} Joseph Weisbecker
+\emph{CHIP-8 programming language and virtual machine} 1978
+
+\end{thebibliography}
 
 \end{document}
