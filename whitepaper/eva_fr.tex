@@ -1,5 +1,3 @@
-%% LyX 2.3.3 created this file.  For more info, see http://www.lyx.org/.
-%% Do not edit unless you really know what you are doing.
 \documentclass[11pt,twoside,french]{article}
 \usepackage{beraserif}
 \usepackage{berasans}
@@ -9,7 +7,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[a4paper]{geometry}
-\geometry{verbose,lmargin=5cm,rmargin=4cm}
+\geometry{verbose,lmargin=4cm,rmargin=3cm}
 \usepackage{color}
 \usepackage{babel}
 \makeatletter
@@ -31,13 +29,7 @@
  pdfkeywords={asm,assembleur,vm}}
 
 \makeatletter
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
-
-% \AtBeginDocument{\providecommand\tabref[1]{\ref{tab:#1}}}
 \newcommand{\noun}[1]{\textsc{#1}}
-%% Because html converters don't know tabularnewline
-\providecommand{\tabularnewline}{\\}
 
 
 \begin{document}
@@ -46,15 +38,17 @@
 
 \maketitle
 \clearpage{}
-\tableofcontents{}
-\cleardoublepage{}
-\vfill{}
 
-\section{Remarque préliminaire}
+\section*{Remarque préliminaire}
 
 Ce document est écris au présent. Il n'en reste pas moins une projection de ce que sera Eva au terme de son développement. Il faut donc le lire comme une description détaillée du projet final Eva et non comme une description de son état actuel.
 
-\cleardoublepage{}
+\cleardoublepage
+
+\tableofcontents
+\cleardoublepage
+
+\vfill
 
 \section{Introduction}
 
@@ -80,12 +74,7 @@ succinct mais complet. Par complet nous entendons informellement "suffisant pour
 
 \section{Description technique}
 
-\begin{figure}[h!]
-  \includegraphics[height=10cm, keepaspectratio]{diagram1.pdf}
-  \caption{\label{fig:diagram1} Structure de la machine virtuelle Eva}
-\end{figure}
-
-L'ensemble du projet Eva se compose de plusieurs outils.
+L'ensemble du projet Eva se compose de plusieurs outils \ref{fig:diagram1}).
 
 \begin{itemize}
   \item \textbf{Cœur de la VM} \\
@@ -97,10 +86,19 @@ L'ensemble du projet Eva se compose de plusieurs outils.
   \item \textbf{Outil de débogage} \\
   Cet outil permet aux utilisateurs de lancer l’exécution de leurs programmes en mode pas à pas. Ils peuvent ainsi observer en détail le comportement de leur programme et comment la VM le traite. On peut par ce biais contrôler le contenu de la mémoire et des registres de la VM.
 
+
   \item \textbf{Bibliothèque Standard} \\
   Le projet Eva est livré avec une collection de modules utilitaires. Il peut s'agir par exemple de fonctions d'affichages ou de calcul mathématique. Cette bibliothèque peut être explicitement chargés en mémoire avant le lancement de la VM, on pourra alors l'utiliser via des "appels systèmes". Une autre alternative étant de passer par une étape d'édition de lien pour embarquer une sélection de module dans un exécutable.
 
 \end{itemize}
+
+\begin{figure}[b]
+  \centering
+  \textbf{WARNING}: Changer le nom du graphe pour éviter qu'il soit ignoré par git
+  \includegraphics[height=10cm, keepaspectratio]{diagram1_graph.pdf}
+  \caption{Structure de la machine virtuelle \noun{Eva}}
+  \label{fig:diagram1}
+\end{figure}
 
 \section{Éléments de conception}
 
@@ -109,33 +107,38 @@ La machine virtuelle doit être minimaliste pour que la compréhension de son fo
 \begin{table}[bp]
 \begin{centering}
 \begin{tabular}{|c|l|}
-\hline 
-\textbf{Instruction} & \textbf{Description}\tabularnewline
-\hline 
-\hline 
-\textbf{ADD} & Addition\tabularnewline
-\hline 
-\textbf{ADC} & Addition avec retenue\tabularnewline
-\hline 
-\textbf{BIC} & RAZ de bit\tabularnewline
-\hline 
-\textbf{CMP} & Comparaison\tabularnewline
-\hline 
-\textbf{MOV} & Écriture de valeur dans le registre\tabularnewline
-\hline 
-\textbf{B} & \emph{Branch Jump}\tabularnewline
-\hline 
-\textbf{BL} & \emph{Branch Link}\tabularnewline
-\hline 
-\textbf{PUSH} & Empiler\tabularnewline
-\hline 
-\textbf{POP} & Dépiler\tabularnewline
-\hline 
-\textbf{SUB} & Soustration avec retenue\tabularnewline
-\hline 
+\hline
+\textbf{Instruction} & \textbf{Description}\\
+\hline
+\hline
+\textbf{ADD} & Addition\\
+\hline
+\textbf{ADC} & Addition avec retenue\\
+\hline
+\textbf{BIC} & RAZ de bit\\
+\hline
+\textbf{CMP} & Comparaison\\
+\hline
+\textbf{MOV} & Écriture de valeur dans le registre\\
+\hline
+\textbf{B} & \emph{Branch Jump}\\
+\hline
+\textbf{BL} & \emph{Branch Link}\\
+\hline
+\textbf{PUSH} & Empiler\\
+\hline
+\textbf{POP} & Dépiler\\
+\hline
+\textbf{SUB} & Soustration avec retenue\\
+\hline
 \end{tabular}
 \par\end{centering}
+<<<<<<< HEAD
 \caption{\label{tab:opcodes}Liste des instructions de la machine virtuelle d'\noun{Eva}.}
+=======
+\caption{Liste des op-codes de la machine virtuelle d'\noun{Eva}.}
+\label{tab:opcodes}
+>>>>>>> 13513c6f671df2b3b3af5198e424c0f0d1172f38
 \end{table}
 
 
