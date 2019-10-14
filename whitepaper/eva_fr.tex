@@ -1,6 +1,7 @@
 \documentclass[11pt,twoside]{article}
 \usepackage[french]{babel}
 \usepackage{libertine}
+\usepackage{listings}
 \usepackage{graphicx}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -42,7 +43,7 @@
 
 \section*{Remarque préliminaire}
 
-Ce document est écrit au présent. Il n'en reste pas moins une projection de ce que sera \noun{Eva} au terme de son développement. Il faut donc le lire comme une description détaillée du projet final \noun{Eva} et non comme une description de son état actuel.
+Ce document est écrit au présent. Il n'en reste pas moins une projection de ce que sera \noun{Eva} au terme de son développement. Il faut donc le lire comme une description détaillée du projet final \noun{Eva} et non comme une description de son état actuel. Par ailleurs des modifications seront certainement apportées à ce document durant le développement d'\noun{Eva}.
 
 \cleardoublepage
 
@@ -54,7 +55,7 @@ Ce document est écrit au présent. Il n'en reste pas moins une projection de ce
 \section{Introduction}
 
 Le langage assembleur constitue la première abstraction à la programmation
-de circuits programmables. Aussi son apprentissage est une étape fondamentale pour l'étudiant curieux de comprendre le fonctionnement des ordinateurs. Mais d'autres applications nécessitent une bonne connaissance des langages d'assemblage. L'écriture des compilateurs par exemple repose assez largement sur une connaissance fine des différentes architectures de microprocesseur existantes (ARM, ELF, X86 ...) et des langages d'assemblage qui leurs sont associés. \\
+de circuits programmables. Aussi son apprentissage est une étape fondamentale pour l'étudiant curieux de comprendre le fonctionnement des ordinateurs. Mais d'autres applications nécessitent une bonne connaissance des langages d'assemblage. L'écriture des compilateurs par exemple repose assez largement sur une connaissance fine des différentes architectures de microprocesseur existantes (ARM, X86 ...) et des langages d'assemblage qui leurs sont associés. \\
 
 Comment alors permettre aux étudiants désireux de s'initier à l'écriture de compilateur ou d'applications très bas niveau de réaliser leurs projets ? Face à l'étendue des architectures à cibler, à la complexité de certaines d’entre elles, ce type de projet peut rapidement devenir compliqué. Bien sur, des alternatives existent déjà. On peut citer le fameux ouvrage \textit{Structure And interpretation of Computer Programs} \cite{SICP} qui propose en dernier chapitre l'implémentation d'une machine abstraite programmable dans un langage d'assemblage simple. D'autres projets comme la machine virtuelle CHIP8 sont des sources intéressantes pour découvrir la programmation assembleur \cite{CHIP8}. Ces outils déjà utilisés dans le but de rendre accessible aux étudiants les thématiques dites de \og~bas niveaux\fg restent néanmoins très spécifiques et limitent grandement le champs des possibles. C'est à ce carrefour entre facilité d'apprentissage et possibilités offertes; ce delta entre outil pédagogique et problèmes en tailles réelles qu'essaye de s'intercaler le projet \noun{Eva}. \\
 
@@ -167,6 +168,34 @@ En plus du développement de la machine virtuelle, \noun{Eva} sera
 un langage de programmation de haut niveau spécifique à \noun{Eva}. Ce dernier
 permettra de complémenter les possibilités offertes par le simple langage
 assembleur supporté nativement par la plate-forme.
+
+\section{Exemples d’utilisation}
+
+Dans cette section nous présentons rapidement quelques scénarios classique d'utilisation d'\noun{Eva}.
+
+\begin{itemize}
+  \item \textbf{Assemblage d'un fichier} \\
+        \lstinline$evasm -a source.evasm -o main.evo$
+
+  \item \textbf{Assemblage et édition directe d'un fichier unique} \\
+        \lstinline$evasm source.evasm -o main.eva$
+
+  \item \textbf{Édition d'un ensemble de modules} \\
+        \lstinline$evasm -l module1.evo module2.evo source.evo -o main.eva$
+
+  \item \textbf{Exécution d'un fichier} \\
+        \lstinline$eva main.eva$
+
+  \item \textbf{Exécution d'un fichier avec débogage} \\
+        \lstinline$eva main.eva --debug$
+
+  \item \textbf{Exécution d'un fichier avec limitation de mémoire utilisées (en mo)} \\
+        \lstinline$eva main.eva --ram 200$
+
+  \item \textbf{Exécution d'un fichier avec chargement explicite de la bibliothèque standard} \\
+        \lstinline$eva main.eva --std$
+\end{itemize}
+
 
 \newpage{}
 
