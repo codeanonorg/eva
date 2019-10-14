@@ -1,23 +1,13 @@
-\documentclass[11pt,twoside,french]{article}
-\usepackage{beraserif}
-\usepackage{berasans}
+\documentclass[11pt,twoside]{article}
+\usepackage[french]{babel}
+\usepackage{libertine}
 \usepackage{graphicx}
-\usepackage{beramono}
-\usepackage{eulervm}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[a4paper]{geometry}
 \geometry{verbose,lmargin=4cm,rmargin=3cm}
 \usepackage{color}
 \usepackage{babel}
-\makeatletter
-\addto\extrasfrench{%
-   \providecommand{\og}{\leavevmode\flqq~}%
-   \providecommand{\fg}{\ifdim\lastskip>\z@\unskip\fi~\frqq}%
-}
-
-\newcommand{\noun}[1]{\textsc{#1}}
-\makeatother
 \usepackage{refstyle}
 \usepackage{algorithm2e}
 \usepackage{microtype}
@@ -29,9 +19,17 @@
  pdfsubject={Un assembleur et VM pour les étudiants, par des étudiants},
  pdfkeywords={asm,assembleur,vm}}
 
+\renewcommand*\familydefault{\sfdefault}
+
+\makeatletter
+\addto\extrasfrench{%
+   \providecommand{\og}{\leavevmode\flqq~}%
+   \providecommand{\fg}{\ifdim\lastskip>\z@\unskip\fi~\frqq}%
+}
+
 \makeatletter
 \newcommand{\noun}[1]{\textsc{#1}}
-
+\makeatother
 
 \begin{document}
 \title{EVA}
@@ -40,9 +38,11 @@
 \maketitle
 \clearpage{}
 
+\vfill
+
 \section*{Remarque préliminaire}
 
-Ce document est écris au présent. Il n'en reste pas moins une projection de ce que sera Eva au terme de son développement. Il faut donc le lire comme une description détaillée du projet final Eva et non comme une description de son état actuel.
+Ce document est écrit au présent. Il n'en reste pas moins une projection de ce que sera \noun{Eva} au terme de son développement. Il faut donc le lire comme une description détaillée du projet final \noun{Eva} et non comme une description de son état actuel.
 
 \cleardoublepage
 
@@ -56,7 +56,7 @@ Ce document est écris au présent. Il n'en reste pas moins une projection de ce
 Le langage assembleur constitue la première abstraction à la programmation
 de circuits programmables. Aussi son apprentissage est une étape fondamentale pour l'étudiant curieux de comprendre le fonctionnement des ordinateurs. Mais d'autres applications nécessitent une bonne connaissance des langages d'assemblage. L'écriture des compilateurs par exemple repose assez largement sur une connaissance fine des différentes architectures existantes (ARM, elf, x86 ...) et des langages d'assemblage qui leurs sont associés. \\
 
-Comment alors permettre aux étudiants désireux de s'initier à l'écriture de compilateur ou d'applications très bas niveau de réaliser leurs projets ? Face à l'étendue des architectures à cibler, à la complexité de certaines d’entre elles, ce type de projet peut rapidement devenir compliqué. Bien sur, des alternatives existent déjà. On peut citer le fameux ouvrage Structure And interpretation of Computer Programs \cite{SICP} qui propose en dernier chapitre l'implémentation d'une machine abstraite programmable dans un langage d'assemblage simple. D'autres projets comme la machine virtuelle CHIP8 sont des sources intéressantes pour découvrir la programmation assembleur \cite{CHIP8}. Ces outils déjà utilisés dans le but de rendre accessible aux étudiants les thématiques dites de "bas niveaux" restent néanmoins très spécifiques et limitent grandement le champs des possibles. C'est à ce carrefour entre facilité d'apprentissage et possibilités offertes; ce delta entre outil pédagogique et problèmes en tailles réelles qu'essaye de s'intercaler le projet \noun{Eva}. \\
+Comment alors permettre aux étudiants désireux de s'initier à l'écriture de compilateur ou d'applications très bas niveau de réaliser leurs projets ? Face à l'étendue des architectures à cibler, à la complexité de certaines d’entre elles, ce type de projet peut rapidement devenir compliqué. Bien sur, des alternatives existent déjà. On peut citer le fameux ouvrage Structure And interpretation of Computer Programs \cite{SICP} qui propose en dernier chapitre l'implémentation d'une machine abstraite programmable dans un langage d'assemblage simple. D'autres projets comme la machine virtuelle CHIP8 sont des sources intéressantes pour découvrir la programmation assembleur \cite{CHIP8}. Ces outils déjà utilisés dans le but de rendre accessible aux étudiants les thématiques dites de \og~bas niveaux\fg restent néanmoins très spécifiques et limitent grandement le champs des possibles. C'est à ce carrefour entre facilité d'apprentissage et possibilités offertes; ce delta entre outil pédagogique et problèmes en tailles réelles qu'essaye de s'intercaler le projet \noun{Eva}. \\
 
 \vfill{}
 \newpage{}
@@ -69,31 +69,31 @@ particulièrement adapté à l'apprentissage de l'assembleur ou encore
 à l'écriture de compilateurs. Son code source publique, clair et documenté
 la rendent accessible et facilement modifiable. \noun{Eva} est programmable
 dans un langage assembleur dédié facile d'accès et doté d'un jeu d'instructions
-succinct mais complet. Par complet nous entendons informellement "suffisant pour permettre d'implanter une application incluant des entrées, des sorties et éventuellement des fonctions de réseaux ou d'affichage graphique". Nous reviendrons en détail sur ce point dans la suite du document.
+succinct mais complet. Par complet nous entendons informellement ``suffisant pour permettre d'implanter une application incluant des entrées, des sorties et éventuellement des fonctions de réseaux ou d'affichage graphique''. Nous reviendrons en détail sur ce point dans la suite du document.
 
 \vfill{}
 
 \section{Description technique}
 
-L'ensemble du projet Eva se compose de plusieurs outils \ref{fig:diagram1}).
+L'ensemble du projet \noun{Eva} se compose de plusieurs outils \figref{diagram1}.
 
 \begin{itemize}
   \item \textbf{Cœur de la VM} \\
-  Il s'agit d'un interpréteur pour le langage machine de Eva. C'est ce programme qui fait l'interface entre l'utilisateur de Eva et sa machine.
+        Il s'agit d'un interpréteur pour le langage machine de \noun{Eva}. C'est ce programme qui fait l'interface entre l'utilisateur de \noun{Eva} et sa machine.
 
   \item \textbf{Assembleur Eva} \\
-  Ce dernier permet la conversion d'un code assembleur en un fichier exécutable par la VM. Il est également accompagné d'un éditeur de lien permettant de composer des exécutables à partir de plusieurs modules assembleur.
+        Ce dernier permet la conversion d'un code assembleur en un fichier exécutable par la VM. Il est également accompagné d'un éditeur de lien permettant de composer des exécutables à partir de plusieurs modules assembleur.
 
   \item \textbf{Outil de débogage} \\
-  Cet outil permet aux utilisateurs de lancer l’exécution de leurs programmes en mode pas à pas. Ils peuvent ainsi observer en détail le comportement de leur programme et comment la VM le traite. On peut par ce biais contrôler le contenu de la mémoire et des registres de la VM.
+        Cet outil permet aux utilisateurs de lancer l’exécution de leurs programmes en mode pas à pas. Ils peuvent ainsi observer en détail le comportement de leur programme et comment la VM le traite. On peut par ce biais contrôler le contenu de la mémoire et des registres de la VM.
 
 
   \item \textbf{Bibliothèque Standard} \\
-  Le projet Eva est livré avec une collection de modules utilitaires. Il peut s'agir par exemple de fonctions d'affichages ou de calcul mathématique. Cette bibliothèque peut être explicitement chargés en mémoire avant le lancement de la VM, on pourra alors l'utiliser via des "appels systèmes". Une autre alternative étant de passer par une étape d'édition de lien pour embarquer une sélection de module dans un exécutable.
+        Le projet \noun{Eva} est livré avec une collection de modules utilitaires. Il peut s'agir par exemple de fonctions d'affichages ou de calcul mathématique. Cette bibliothèque peut être explicitement chargés en mémoire avant le lancement de la VM, on pourra alors l'utiliser via des \og~appels systèmes\fg. Une autre alternative étant de passer par une étape d'édition de lien pour embarquer une sélection de module dans un exécutable.
 
 \end{itemize}
 
-\begin{figure}[p]
+\begin{figure}[tb]
   \centering
   \includegraphics[width=12cm, height=12cm, keepaspectratio]{diagram1_graph.pdf}
   \caption{Structure de la machine virtuelle \noun{Eva}}
@@ -103,39 +103,39 @@ L'ensemble du projet Eva se compose de plusieurs outils \ref{fig:diagram1}).
 
 \section{Éléments de conception}
 
-La machine virtuelle doit être minimaliste pour que la compréhension de son fonctionnement soit accessible, simple à programmer pour rester accessible aux étudiants désireux d'apprendre, mais également suffisamment performante pour supporter le développement d'applications en vrai grandeur. \noun{Eva} étant conçue sur la base du \og retour aux fondamentaux\fg , elle va donc à l'essentiel et propose un jeu d'instructions à la fois concis et simple à prendre en main sans fonctionnalités superflue. Nous avons à ces fins sélectionné un sous-ensemble des instructions ARM \ref{tab:opcodes}.
+La machine virtuelle doit être minimaliste pour que la compréhension de son fonctionnement soit accessible, simple à programmer pour rester accessible aux étudiants désireux d'apprendre, mais également suffisamment performante pour supporter le développement d'applications en vrai grandeur. \noun{Eva} étant conçue sur la base du \og retour aux fondamentaux\fg , elle va donc à l'essentiel et propose un jeu d'instructions à la fois concis et simple à prendre en main sans fonctionnalités superflue. Nous avons à ces fins sélectionné un sous-ensemble des instructions ARM \tabref{opcodes}.
 
-\begin{table}[p]
-\begin{centering}
-\begin{tabular}{|c|l|}
-\hline
-\textbf{Instruction} & \textbf{Description}\\
-\hline
-\hline
-\textbf{ADD} & Addition\\
-\hline
-\textbf{ADC} & Addition avec retenue\\
-\hline
-\textbf{BIC} & RAZ de bit\\
-\hline
-\textbf{CMP} & Comparaison\\
-\hline
-\textbf{MOV} & Écriture de valeur dans le registre\\
-\hline
-\textbf{B} & \emph{Branch Jump}\\
-\hline
-\textbf{BL} & \emph{Branch Link}\\
-\hline
-\textbf{PUSH} & Empiler\\
-\hline
-\textbf{POP} & Dépiler\\
-\hline
-\textbf{SUB} & Soustration avec retenue\\
-\hline
-\end{tabular}
-\par\end{centering}
-\caption{Liste des op-codes de la machine virtuelle d'\noun{Eva}.}
-\label{tab:opcodes}
+\begin{table}[tb]
+  \begin{centering}
+    \begin{tabular}{|c|l|}
+      \hline
+      \textbf{Instruction} & \textbf{Description}                \\
+      \hline
+      \hline
+      \textbf{ADD}         & Addition                            \\
+      \hline
+      \textbf{ADC}         & Addition avec retenue               \\
+      \hline
+      \textbf{BIC}         & RAZ de bit                          \\
+      \hline
+      \textbf{CMP}         & Comparaison                         \\
+      \hline
+      \textbf{MOV}         & Écriture de valeur dans le registre \\
+      \hline
+      \textbf{B}           & \emph{Branch Jump}                  \\
+      \hline
+      \textbf{BL}          & \emph{Branch Link}                  \\
+      \hline
+      \textbf{PUSH}        & Empiler                             \\
+      \hline
+      \textbf{POP}         & Dépiler                             \\
+      \hline
+      \textbf{SUB}         & Soustration avec retenue            \\
+      \hline
+    \end{tabular}
+    \par\end{centering}
+  \caption{Liste des op-codes de la machine virtuelle d'\noun{Eva}.}
+  \label{tab:opcodes}
 \end{table}
 
 
@@ -147,7 +147,7 @@ la librairie standard. Une telle contrainte assure que l'implantation
 soit claire, le code source portable, et la compilation aisée.
 
 Cette implantation minimale va de paire avec l'idéologie derrière
-Eva : prioriser l'accessibilité et la fiabilité. De plus, l'aspect
+\noun{Eva} : prioriser l'accessibilité et la fiabilité. De plus, l'aspect
 sécurité est d'une grande importance pour le projet, où la correction
 de code aura toujours priorité sur l'ajout de nouvelles fonctionnalités.
 
@@ -163,8 +163,8 @@ composante du projet soit publique et accessible pour le plus grand nombre.
 
 En plus du développement de la machine virtuelle, \noun{Eva} sera
 également le socle de plusieurs projets dont divers compilateurs ciblant
-EVA. Parmi ces compilateurs l'équipe d'EVA développera et maintiendra
-un langage de programmation de haut niveau spécifique à EVA. Ce dernier
+\noun{Eva}. Parmi ces compilateurs l'équipe d'\noun{Eva} développera et maintiendra
+un langage de programmation de haut niveau spécifique à \noun{Eva}. Ce dernier
 permettra de complémenter les possibilités offertes par le simple langage
 assembleur supporté nativement par la plate-forme.
 
@@ -173,13 +173,13 @@ assembleur supporté nativement par la plate-forme.
 \clearpage{}
 
 \begin{thebibliography}{XXXXXX}
-\label{chap:bib}
+  \label{chap:bib}
 
-\bibitem{SICP} Harold Abelson and Gerald Jay Sussman
-\emph{Structure and Interpretation of Computer Programs} MIT, 1996
+  \bibitem{SICP} Harold Abelson and Gerald Jay Sussman
+  \emph{Structure and Interpretation of Computer Programs} MIT, 1996
 
-\bibitem{CHIP8} Joseph Weisbecker
-\emph{CHIP-8 programming language and virtual machine} 1978
+  \bibitem{CHIP8} Joseph Weisbecker
+  \emph{CHIP-8 programming language and virtual machine} 1978
 
 \end{thebibliography}
 
