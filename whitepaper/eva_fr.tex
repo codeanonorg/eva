@@ -7,7 +7,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[a4paper]{geometry}
-\geometry{verbose,lmargin=5cm,rmargin=4cm}
+\geometry{verbose,lmargin=4cm,rmargin=3cm}
 \usepackage{color}
 \usepackage{babel}
 \makeatletter
@@ -38,15 +38,17 @@
 
 \maketitle
 \clearpage{}
-\tableofcontents{}
-\cleardoublepage{}
-\vfill{}
 
-\section{Remarque préliminaire}
+\section*{Remarque préliminaire}
 
 Ce document est écris au présent. Il n'en reste pas moins une projection de ce que sera Eva au terme de son développement. Il faut donc le lire comme une description détaillée du projet final Eva et non comme une description de son état actuel.
 
-\cleardoublepage{}
+\cleardoublepage
+
+\tableofcontents
+\cleardoublepage
+
+\vfill
 
 \section{Introduction}
 
@@ -72,13 +74,17 @@ succinct mais complet. Par complet nous entendons informellement "suffisant pour
 
 \section{Description technique}
 
-\begin{figure}[h!]
-  \includegraphics[height=10cm, keepaspectratio]{diagram1.pdf}
-  \caption{\label{fig:diagram1} Structure de la machine virtuelle Eva}
+
+TODO (\ref{fig:diagram1})
+
+
+\begin{figure}[b]
+  \centering
+  \textbf{WARNING}: Changer le nom du graphe pour éviter qu'il soit ignoré par git
+  \includegraphics[height=10cm, keepaspectratio]{diagram1_graph.pdf}
+  \caption{Structure de la machine virtuelle \noun{Eva}}
+  \label{fig:diagram1}
 \end{figure}
-
-\vfill{}
-
 
 \section{Éléments de conception}
 
@@ -90,6 +96,7 @@ conçue sur la base du \og retour aux fondamentaux\fg , elle va à l'essentiel
 et propose un jeu d'instructions à la fois concis et simple à prendre
 en main sans fonctionnalités superflue. Nous avons à ces fins séléctionné
 un sous-ensemble des instructions ARM \tabref{opcodes}.
+
 \begin{table}[bp]
 \begin{centering}
 \begin{tabular}{|c|l|}
@@ -119,7 +126,8 @@ un sous-ensemble des instructions ARM \tabref{opcodes}.
 \hline
 \end{tabular}
 \par\end{centering}
-\caption{\label{tab:opcodes}Liste des op-codes de la machine virtuelle d'\noun{Eva}.}
+\caption{Liste des op-codes de la machine virtuelle d'\noun{Eva}.}
+\label{tab:opcodes}
 \end{table}
 
 
