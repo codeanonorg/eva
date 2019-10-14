@@ -21,7 +21,7 @@
 # *.eps
 
 *.pdf
-!_graph.pdf
+!*_graph.pdf
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl
