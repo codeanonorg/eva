@@ -2,19 +2,19 @@
 
 ⚠︎ En cours de construction ⚠︎
 
-| Instruction |  |
-| :------ | :----- |
-| **ADD** | addition
-| **ADC** | addition avec retenue |
-| **BIC** | _Bit Clear_ |
-| **CMP** | Comparaison | 
-| **MOV** | _Registre <- valeur_ |
-| **B** | _Branch/Jump_ |
-| **BL** | _Branch and link_ |
-| **PUSH** | empiler |
-| **POP** | dépiler |
-| **SUB** | soustraction |
-| **SUBC** | soustraction avec retenue |
+| Instruction |                           |
+| :---------- | :------------------------ |
+| **ADD**     | addition                  |
+| **ADC**     | addition avec retenue     |
+| **BIC**     | _Bit Clear_               |
+| **CMP**     | Comparaison               |
+| **MOV**     | _Registre <- valeur_      |
+| **B**       | _Branch/Jump_             |
+| **BL**      | _Branch and link_         |
+| **PUSH**    | empiler                   |
+| **POP**     | dépiler                   |
+| **SUB**     | soustraction              |
+| **SUBC**    | soustraction avec retenue |
 
 
 # paramètres par défaut
