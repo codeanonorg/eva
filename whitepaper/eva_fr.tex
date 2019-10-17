@@ -1,4 +1,4 @@
-\documentclass[11pt,twoside]{article}
+\documentclass[11pt]{article}
 \usepackage[french]{babel}
 \usepackage{libertine}
 \usepackage{listings}
@@ -6,7 +6,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[a4paper]{geometry}
-\geometry{verbose,lmargin=4.5cm,rmargin=3.4cm}
+\geometry{verbose,lmargin=4.5cm,rmargin=3cm}
 \usepackage{color}
 \usepackage{babel}
 \usepackage{refstyle}
@@ -79,7 +79,7 @@ Ce document est écrit au présent. Il n'en reste pas moins une projection de ce
 
 \lettrine[lines=3,slope=.3em]%
 {L}{e} langage assembleur constitue la première abstraction à la programmation
-de circuits programmables. Aussi son apprentissage est une étape fondamentale pour l'étudiant curieux de comprendre le fonctionnement des ordinateurs. Mais d'autres applications nécessitent une bonne connaissance des langages d'assemblage. L'écriture des compilateurs par exemple repose assez largement sur une connaissance fine des différentes architectures existantes (ARM, elf, x86 ...) et des langages d'assemblage qui leurs sont associés.
+de circuits programmables. Aussi son apprentissage est une étape fondamentale pour l'étudiant curieux de comprendre le fonctionnement des ordinateurs. Mais d'autres applications nécessitent une bonne connaissance des langages d'assemblage. L'écriture des compilateurs par exemple repose assez largement sur une connaissance fine des différentes architectures existantes (ARM, x86, PowerPC, etc.) et des langages d'assemblage qui leurs sont associés.
 
 Comment alors permettre aux étudiants désireux de s'initier à l'écriture de compilateur ou d'applications très bas niveau de réaliser leurs projets ? Face à l'étendue des architectures à cibler, à la complexité de certaines d’entre elles, ce type de projet peut rapidement devenir compliqué. Bien sur, des alternatives existent déjà. On peut citer le fameux ouvrage \textit{Structure And interpretation of Computer Programs} \cite{SICP} qui propose en dernier chapitre l'implémentation d'une machine abstraite programmable dans un langage d'assemblage simple. D'autres projets comme la machine virtuelle CHIP8 sont des sources intéressantes pour découvrir la programmation assembleur \cite{CHIP8}. Ces outils déjà utilisés dans le but de rendre accessible aux étudiants les thématiques dites de \og~bas niveaux\fg restent néanmoins très spécifiques et limitent grandement le champs des possibles. C'est à ce carrefour entre facilité d'apprentissage et possibilités offertes; ce delta entre outil pédagogique et problèmes en tailles réelles qu'essaye de s'intercaler le projet \noun{Eva}. \\
 
