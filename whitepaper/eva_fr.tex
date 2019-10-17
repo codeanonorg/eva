@@ -6,12 +6,14 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[a4paper]{geometry}
-\geometry{verbose,lmargin=4cm,rmargin=3cm}
+\geometry{verbose,lmargin=4.5cm,rmargin=3.4cm}
 \usepackage{color}
 \usepackage{babel}
 \usepackage{refstyle}
 \usepackage{algorithm2e}
 \usepackage{microtype}
+\usepackage{fancyhdr}
+\usepackage{lettrine}
 \usepackage[unicode=true,pdfusetitle,
  bookmarks=true,bookmarksnumbered=true,bookmarksopen=false,
  breaklinks=true,pdfborder={0 0 0},pdfborderstyle={},backref=section,colorlinks=true]
@@ -32,37 +34,65 @@
 \newcommand{\noun}[1]{\textsc{#1}}
 \makeatother
 
+\setlength{\headheight}{15pt}
+\pagestyle{fancy}
+\fancyhead[LE,RO]{\noun{Eva}}
+\fancyhead[C]{}
+\fancyfoot[C]{}
+\fancyfoot[LO, RE]{\noun{CodeAnon}}
+\fancyfoot[RO,LE]{\thepage}
+
 \begin{document}
 \title{EVA}
 \author{Association CodeAnon}
 
 \maketitle
-\clearpage{}
+\begin{abstract}
+  Nous proposons une machine virtuelle destinée aux étudiants, concue et implantée par des étudiants, afin de faciliter l'apprentissage de la programmation bas niveau. La machine virtuelle, bien que simple, reste complète, permettant aux utilisateurs de faire tourner des programmes complets avec \noun{Eva}.
+\end{abstract}
+\vfill
+\begin{center}
+  \includegraphics[height=8cm]{logo_graph.pdf}
+\end{center}
+\vfill
+\cleardoublepage
 
+\hspace{0pt}
 \vfill
 
 \section*{Remarque préliminaire}
 
 Ce document est écrit au présent. Il n'en reste pas moins une projection de ce que sera \noun{Eva} au terme de son développement. Il faut donc le lire comme une description détaillée du projet final \noun{Eva} et non comme une description de son état actuel. Par ailleurs des modifications seront certainement apportées à ce document durant le développement d'\noun{Eva}.
 
-\cleardoublepage
+\vfill
+\hspace{0pt}
+
+\clearpage
 
 \tableofcontents
 \cleardoublepage
 
+\hspace{0pt}
 \vfill
 
 \section{Introduction}
 
-Le langage assembleur constitue la première abstraction à la programmation
-de circuits programmables. Aussi son apprentissage est une étape fondamentale pour l'étudiant curieux de comprendre le fonctionnement des ordinateurs. Mais d'autres applications nécessitent une bonne connaissance des langages d'assemblage. L'écriture des compilateurs par exemple repose assez largement sur une connaissance fine des différentes architectures de microprocesseur existantes (ARM, X86 ...) et des langages d'assemblage qui leurs sont associés. \\
+\lettrine[lines=3,slope=.3em]%
+{L}{e} langage assembleur constitue la première abstraction à la programmation
+de circuits programmables. Aussi son apprentissage est une étape fondamentale pour l'étudiant curieux de comprendre le fonctionnement des ordinateurs. Mais d'autres applications nécessitent une bonne connaissance des langages d'assemblage. L'écriture des compilateurs par exemple repose assez largement sur une connaissance fine des différentes architectures existantes (ARM, elf, x86 ...) et des langages d'assemblage qui leurs sont associés.
 
 Comment alors permettre aux étudiants désireux de s'initier à l'écriture de compilateur ou d'applications très bas niveau de réaliser leurs projets ? Face à l'étendue des architectures à cibler, à la complexité de certaines d’entre elles, ce type de projet peut rapidement devenir compliqué. Bien sur, des alternatives existent déjà. On peut citer le fameux ouvrage \textit{Structure And interpretation of Computer Programs} \cite{SICP} qui propose en dernier chapitre l'implémentation d'une machine abstraite programmable dans un langage d'assemblage simple. D'autres projets comme la machine virtuelle CHIP8 sont des sources intéressantes pour découvrir la programmation assembleur \cite{CHIP8}. Ces outils déjà utilisés dans le but de rendre accessible aux étudiants les thématiques dites de \og~bas niveaux\fg restent néanmoins très spécifiques et limitent grandement le champs des possibles. C'est à ce carrefour entre facilité d'apprentissage et possibilités offertes; ce delta entre outil pédagogique et problèmes en tailles réelles qu'essaye de s'intercaler le projet \noun{Eva}. \\
 
-\vfill{}
+\section{Projets existants}
+
+D'autres machines virtuelles existent, telles que la JVM (\emph{Java Virtual Machine}) où le CLR (\emph{Common Language Runtime}), qui sont destinés à un usage généraliste. Ces machines virtuelles sont performantes, optimisées et complètes; cependant ceci rend ces projets inatteignables pour des étudiants en license, même informatique.\\
+D'autres VMs comme le CHIP8 sont trop limités, et perdent le côté utilisable; ces machines sont faciles à raisonner et à implanter mais de par leur simplicité il est impossible de programmer des programmes de complexité grandissante.
+
+\vfill
+\hspace{0pt}
 \newpage{}
 
-\section{Eva}
+\section{Description du projet}
 
 \noun{Eva} est une machine virtuelle développée par des étudiants pour les
 étudiants. Simple et légère, elle offre un terrain d'expérimentation
@@ -71,8 +101,6 @@ particulièrement adapté à l'apprentissage de l'assembleur ou encore
 la rendent accessible et facilement modifiable. \noun{Eva} est programmable
 dans un langage assembleur dédié facile d'accès et doté d'un jeu d'instructions
 succinct mais complet. Par complet nous entendons informellement ``suffisant pour permettre d'implanter une application incluant des entrées, des sorties et éventuellement des fonctions de réseaux ou d'affichage graphique''. Nous reviendrons en détail sur ce point dans la suite du document.
-
-\vfill{}
 
 \section{Description technique}
 
