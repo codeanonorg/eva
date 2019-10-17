@@ -6,7 +6,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[a4paper]{geometry}
-\geometry{verbose,lmargin=4.5cm,rmargin=3cm}
+\geometry{verbose,lmargin=4.2cm,rmargin=3cm}
 \usepackage{color}
 \usepackage{babel}
 \usepackage{refstyle}
@@ -101,7 +101,7 @@ la rendent accessible et facilement modifiable. \noun{Eva} est programmable
 dans un langage assembleur dédié facile d'accès et doté d'un jeu d'instructions
 succinct mais complet. Par complet nous entendons informellement ``suffisant pour permettre d'implanter une application incluant des entrées, des sorties et éventuellement des fonctions de réseaux ou d'affichage graphique''. Nous reviendrons en détail sur ce point dans la suite du document.
 
-\section{Description technique}
+\subsection{Description technique}
 
 L'ensemble du projet \noun{Eva} se compose de plusieurs outils \figref{diagram1}.
 
@@ -129,7 +129,7 @@ L'ensemble du projet \noun{Eva} se compose de plusieurs outils \figref{diagram1}
 \end{figure}
 
 
-\section{Éléments de conception}
+\subsection{Éléments de conception}
 
 La machine virtuelle doit être minimaliste pour que la compréhension de son fonctionnement soit accessible, simple à programmer pour rester accessible aux étudiants désireux d'apprendre, mais également suffisamment performante pour supporter le développement d'applications en vrai grandeur. \noun{Eva} étant conçue sur la base du \og retour aux fondamentaux\fg , elle va donc à l'essentiel et propose un jeu d'instructions à la fois concis et simple à prendre en main sans fonctionnalités superflue. Nous avons à ces fins sélectionné un sous-ensemble des instructions ARM \tabref{instructions}.
 
@@ -167,7 +167,7 @@ La machine virtuelle doit être minimaliste pour que la compréhension de son fo
 \end{table}
 
 
-\section{Implantation de la machine virtuelle}
+\subsection{Implantation de la machine virtuelle}
 
 Afin d'aider au développement du projet, \noun{Eva} va être implantée
 en C (norme 99) et ne doit dépendre d'aucun code source autre que
@@ -178,23 +178,6 @@ Cette implantation minimale va de paire avec l'idéologie derrière
 \noun{Eva} : prioriser l'accessibilité et la fiabilité. De plus, l'aspect
 sécurité est d'une grande importance pour le projet et la correction
 du code aura toujours priorité sur l'ajout de nouvelles fonctionnalités.
-
-\section{Disponibilité du projet}
-
-\noun{Eva} est un projet publique, dont le code et les binaires seront
-accessibles en open-source, suivant une licence MIT. Cela veut dire
-que n'importe quel utilisateur peut télécharger, lire et modifier
-le code source. Le projet étant pédagogique, il va de soit que chaque
-composante du projet soit publique et accessible pour le plus grand nombre.
-
-\section{Projets connexes}
-
-En plus du développement de la machine virtuelle, \noun{Eva} sera
-également le socle de plusieurs projets dont divers compilateurs ciblant
-\noun{Eva}. Parmi ces compilateurs l'équipe d'\noun{Eva} développera et maintiendra
-un langage de programmation de haut niveau spécifique à \noun{Eva}. Ce dernier
-permettra de complémenter les possibilités offertes par le simple langage
-assembleur supporté nativement par la plate-forme.
 
 \section{Exemples d’utilisation}
 
@@ -223,10 +206,24 @@ Dans cette section nous présentons rapidement quelques scénarios classiques d'
         \lstinline$eva main.eva --std$
 \end{itemize}
 
+\subsection{Disponibilité du projet}
 
-\newpage{}
+\noun{Eva} est un projet publique, dont le code et les binaires seront
+accessibles en open-source, suivant une licence MIT. Cela veut dire
+que n'importe quel utilisateur peut télécharger, lire et modifier
+le code source. Le projet étant pédagogique, il va de soit que chaque
+composante du projet soit publique et accessible pour le plus grand nombre.
 
-\clearpage{}
+\section{Projets connexes}
+
+En plus du développement de la machine virtuelle, \noun{Eva} sera
+également le socle de plusieurs projets dont divers compilateurs ciblant
+\noun{Eva}. Parmi ces compilateurs l'équipe d'\noun{Eva} développera et maintiendra
+un langage de programmation de haut niveau spécifique à \noun{Eva}. Ce dernier
+permettra de complémenter les possibilités offertes par le simple langage
+assembleur supporté nativement par la plate-forme.
+
+\cleardoublepage
 
 \begin{thebibliography}{XXXXXX}
   \label{chap:bib}
