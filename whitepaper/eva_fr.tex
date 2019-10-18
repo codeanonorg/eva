@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[11pt,twoside]{article}
 \usepackage[french]{babel}
 \usepackage{libertine}
 \usepackage{listings}
@@ -6,7 +6,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[a4paper]{geometry}
-\geometry{verbose,lmargin=4.2cm,rmargin=3cm}
+\geometry{verbose,lmargin=4.5cm,rmargin=3cm}
 \usepackage{color}
 \usepackage{babel}
 \usepackage{refstyle}
@@ -101,7 +101,7 @@ la rendent accessible et facilement modifiable. \noun{Eva} est programmable
 dans un langage assembleur dédié facile d'accès et doté d'un jeu d'instructions
 succinct mais complet. Par complet nous entendons informellement ``suffisant pour permettre d'implanter une application incluant des entrées, des sorties et éventuellement des fonctions de réseaux ou d'affichage graphique''. Nous reviendrons en détail sur ce point dans la suite du document.
 
-\subsection{Description technique}
+\section{Description technique}
 
 L'ensemble du projet \noun{Eva} se compose de plusieurs outils \figref{diagram1}.
 
@@ -129,7 +129,7 @@ L'ensemble du projet \noun{Eva} se compose de plusieurs outils \figref{diagram1}
 \end{figure}
 
 
-\subsection{Éléments de conception}
+\section{Éléments de conception}
 
 La machine virtuelle doit être minimaliste pour que la compréhension de son fonctionnement soit accessible, simple à programmer pour rester accessible aux étudiants désireux d'apprendre, mais également suffisamment performante pour supporter le développement d'applications en vrai grandeur. \noun{Eva} étant conçue sur la base du \og retour aux fondamentaux\fg , elle va donc à l'essentiel et propose un jeu d'instructions à la fois concis et simple à prendre en main sans fonctionnalités superflue. Nous avons à ces fins sélectionné un sous-ensemble des instructions ARM \tabref{instructions}.
 
@@ -167,7 +167,7 @@ La machine virtuelle doit être minimaliste pour que la compréhension de son fo
 \end{table}
 
 
-\subsection{Implantation de la machine virtuelle}
+\section{Implantation de la machine virtuelle}
 
 Afin d'aider au développement du projet, \noun{Eva} va être implantée
 en C (norme 99) et ne doit dépendre d'aucun code source autre que
@@ -187,7 +187,6 @@ accessibles en open-source, suivant une licence MIT. Cela veut dire
 que n'importe quel utilisateur peut télécharger, lire et modifier
 le code source. Le projet étant pédagogique, il va de soit que chaque
 composante du projet soit publique et accessible pour le plus grand nombre.
-
 
 \section{Projets connexes}
 
