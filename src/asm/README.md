@@ -4,7 +4,7 @@
 
 |         | code instruction | reset | flag   | offset | opérandes |
 |:------- | :--------------: | :---: | :----: | :----: | :-------- |
-|         | 4 bits           | 1 bit | 1 bits | 2 bit  | 20 bits   |
+|         | 4 bits           | 1 bit | 1 bit  | 2 bit  | 20 bits   |
 | ADD   Rn Rm   | 0000 | 0 | 0 | .. | n[4 bits] m[4 bits]     |
 | ADD   Rn Val  | 0001 | 0 | 0 | .. | n[4 bits] val[16 bits]  |
 | ADDC  Rn Rm   | 0000 | 0 | 1 | .. | n[4 bits] m[4 bits]     |
