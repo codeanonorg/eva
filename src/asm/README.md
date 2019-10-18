@@ -16,7 +16,6 @@ Les op-codes ont une taille fixée de 32 bits. Leur structure est toujours la m�
 
 ## Détail de la structure des opcodes
 
-
 ### Les 8 bits d'instruction
 
 Les 8 premiers bits des op-codes permettent la distrinction entre les différentes instructions. Plus particulièrement :
