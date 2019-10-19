@@ -1,0 +1,1 @@
+option('SDL', type: 'feature', value: 'auto')
