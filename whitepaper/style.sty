@@ -1,0 +1,41 @@
+\usepackage{libertine}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper]{geometry}
+\geometry{verbose,lmargin=4.2cm,rmargin=3cm}
+\usepackage{color}
+\usepackage{babel}
+\usepackage{refstyle}
+\usepackage{algorithm2e}
+\usepackage{microtype}
+\usepackage{fancyhdr}
+\usepackage{lettrine}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=true,bookmarksopen=false,
+ breaklinks=true,pdfborder={0 0 0},pdfborderstyle={},backref=section,colorlinks=true]
+ {hyperref}
+\hypersetup{
+ pdfsubject={Un assembleur et VM pour les étudiants, par des étudiants},
+ pdfkeywords={asm,assembleur,vm}}
+
+\renewcommand*\familydefault{\sfdefault}
+
+\makeatletter
+\addto\extrasfrench{%
+   \providecommand{\og}{\leavevmode\flqq~}%
+   \providecommand{\fg}{\ifdim\lastskip>\z@\unskip\fi~\frqq}%
+}
+
+\makeatletter
+\newcommand{\noun}[1]{\textsc{#1}}
+\makeatother
+
+\setlength{\headheight}{15pt}
+\pagestyle{fancy}
+\fancyhead[LE,RO]{\noun{Eva}}
+\fancyhead[C]{}
+\fancyfoot[C]{}
+\fancyfoot[LO, RE]{\noun{CodeAnon}}
+\fancyfoot[RO,LE]{\thepage}
