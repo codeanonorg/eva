@@ -16,7 +16,7 @@ PREFIX := /usr/local
 
 # Compiler Flags
 ALL_CFLAGS		:= $(CFLAGS)
-ALL_CFLAGS		+= -Wall -Wextra -pedantic -ansi
+ALL_CFLAGS		+= -std=c99 -Wall -Wextra -pedantic -ansi
 ALL_CFLAGS		+= -fno-strict-aliasing
 ALL_CFLAGS		+= -Wuninitialized -Winit-self -Wfloat-equal
 ALL_CFLAGS		+= -Wundef -Wshadow -Wc++-compat -Wcast-qual -Wcast-align
