@@ -3,9 +3,6 @@ LD = gcc
 RM = rm -rf
 V  = 0
 
-SOURCES =
-OBJECTS = $(patsubst %.c, %.o, $SOURCES)
-
 TARGET = evavm
 SRCDIR = src
 BINDIR = bin
@@ -54,13 +51,31 @@ RMDIR_0 	= @$(REAL_RMDIR)
 RMDIR_1 	= $(REAL_RMDIR)
 RMDIR 		= $(RMDIR_$(V))
 
+# compile_commands.json (for various tools)
+%.compdb_entry: %.c
+	@echo "    {" > $@
+	@echo "        \"command\": \"cc  $(CFLAGS) $(CPPFLAGS) -c $<\","   >> $@
+	@echo "        \"directory\": \"$(CURDIR)\","               >> $@
+	@echo "        \"file\": \"$<\""                    >> $@
+	@echo "    },"                              >> $@
+
+COMPDB_ENTRIES = $(addsuffix .compdb_entry, $(basename $(SRC)))
+
+compile_commands.json: $(COMPDB_ENTRIES)
+	@echo "[" > $@.tmp
+	@cat $^ >> $@.tmp
+	@sed '$$d' < $@.tmp > $@
+	@echo "    }" >> $@
+	@echo "]" >> $@
+	@rm $^ $@.tmp
+
 
 # Build Rules
 .PHONY: clean
 .DEFAULT_GOAL := all
 
 all: setup $(BIN)
-setup: dir
+setup: dir compile_commands.json
 remake: clean all
 
 dir:
@@ -80,5 +95,5 @@ install: $(BIN)
 	$(INSTALL) $(BIN) $(PREFIX)/bin
 
 clean:
-	$(RM) $(OBJ) $(DEP) $(BIN)
+	$(RM) $(OBJ) $(DEP) $(BIN) compile_commands.json
 	$(RMDIR) $(OBJDIR) $(BINDIR) 2> /dev/null; true
