@@ -278,3 +278,5 @@ TSWLatexianTemp*
 bin/
 obj/
 
+# Compile commands
+compile_commands.json
