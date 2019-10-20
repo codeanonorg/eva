@@ -1,3 +1,9 @@
-eva_src = files('disassemble.c', 'vm.c')
+eva_src = files('disassemble.c')
 
-eva_exe = executable(meson.project_name(), eva_src, dependencies: sdl_dep, install:true)
+eva_lib = static_library(meson.project_name(), eva_src)
+
+eva_exe = executable(meson.project_name(),
+	files('vm.c'),
+	# dependencies: sdl_dep,
+	link_with: eva_lib,
+	install:true)
