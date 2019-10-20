@@ -6,8 +6,8 @@ void disassemble(opcode_t op) {
 	case 0x0: {
 		/* ADD,ADC, MOV between registers */
 		unsigned short op1, op2;
-		op1 = op.operands & 0xF0000 >> 16;
-		op2 = op.operands & 0x0F000 >> 12;
+		op1 = (op.operands & 0xF0000) >> 16;
+		op2 = (op.operands & 0x0F000) >> 12;
 		if (op.reinit)
 			printf("MOV\tR%d, R%d\n", op1, op2);
 		else if (op.flag)
@@ -32,7 +32,7 @@ void disassemble(opcode_t op) {
 	}
 	case 0x2: {
 		/* PUSH or POP a register */
-		unsigned short op1 = op.operands & 0xF0000 >> 16;
+		unsigned short op1 = op.operands >> 16;
 		if (op.flag)
 			printf("POP\tR%d\n", op1);
 		else
