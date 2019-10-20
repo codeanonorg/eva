@@ -1,24 +1,59 @@
 # Assembleur pour Eva
 
+## Le langage Eva
+
+La machine virtuelle eva (cf [description](../../README.md)) est fournie avec un langage d'assemblage permettant sa programmation. Ce document en propose une description synthétique. Une documentation complète du langage Eva est disponible à [cette adresse]().
+
+
+### Aperçu de l'architecture Eva
+
+Eva est une machine virtuelle à registres. Elle comporte précisément 16 registres de 32 bits chacuns dont les rôles sont donnés par la convention suivante :
+
++ R0 : général + _syscall_
++ R1 : _flags_
++ R2-11 : général
++ R12 : _frame pointer_   [fp]
++ R13 : _stack pointer_   [sp]
++ R14 : _link register_   [lp]
++ R15 : _program counter_ [pc]
+
+
+En plus de ces registres, Eva dispose bien sûr d'une RAM de taille variable selon les besoins de l'utilisateur (par défaut 512 mo). Nottons qu'une partie de cette RAM est réservée pour servir de pile. La taille de la pile peut également varier selon les besoins de l'utilisateur.
+
+Les programmes sont habituellement chargés en mémoire à l'adresse #0. Toutefois, dans le cas où il est explicitement demandé de charger les programmes utilitaires en mémoire (cf []()), les programmes sont alors chargés à l'adresse N?.
+
+
+### Introduction
+
+-> Tuto ?
+
+### Sucres syntaxiques
+
+-> Détails sur les variantes d'instructions
+
+### Conseils pour l'optimisation des programmes
+
+-> Détails sur la séparation des instructions en plusieurs Op-codes
+
 ## Construction des Op-codes
 
 |         | code instruction | reset | flag   | offset | opérandes |
 |:------- | :--------------: | :---: | :----: | :----: | :-------- |
 |         | 4 bits           | 1 bit | 1 bit  | 1 bit  | 20 bits   |
-| ADD   Rn Rm   | 0000 | 0 | 0 | .. | n[4 bits] m[4 bits]     |
-| ADD   Rn Val  | 0001 | 0 | 0 | .. | n[4 bits] val[16 bits]  |
-| ADDC  Rn Rm   | 0000 | 0 | 1 | .. | n[4 bits] m[4 bits]     |
-| ADDC  Rn Val  | 0001 | 0 | 1 | .. | n[4 bits] val[16 bits]  |
-| MOV   Rn Rm   | 0000 | 1 | 0 | .. | n[4 bits] m[4 bits]     |
-| MOV   Rn Val  | 0001 | 1 | 0 | .. | n[4 bits] val[16 bits]  |
-| PUSH  Rn      | 0010 | 0 | 0 | 10 | n[4 bits]               |
-| POP   Rn      | 0010 | 1 | 0 | 10 | n[4 bits]               |
+| `ADD   Rn Rm`   | 0000 | 0 | 0 | .. | n[4 bits] m[4 bits]     |
+| `ADD   Rn Val`  | 0001 | 0 | 0 | .. | n[4 bits] val[16 bits]  |
+| `ADDC  Rn Rm`   | 0000 | 0 | 1 | .. | n[4 bits] m[4 bits]     |
+| `ADDC  Rn Val`  | 0001 | 0 | 1 | .. | n[4 bits] val[16 bits]  |
+| `MOV   Rn Rm`   | 0000 | 1 | 0 | .. | n[4 bits] m[4 bits]     |
+| `MOV   Rn Val`  | 0001 | 1 | 0 | .. | n[4 bits] val[16 bits]  |
+| `PUSH  Rn`      | 0010 | 0 | 0 | 00 | n[4 bits]               |
+| `POP   Rn`      | 0010 | 1 | 0 | 00 | n[4 bits]               |
 
 Les op-codes ont une taille fixée de 32 bits. Leur structure est toujours la même.
 
 ## Détail de la structure des opcodes
 
-### Les 8 bits d'instruction
+### Les 8 bits d'instructions
 
 Les 8 premiers bits des op-codes permettent la distrinction entre les différentes instructions. Plus particulièrement :
 
