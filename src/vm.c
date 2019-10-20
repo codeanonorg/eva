@@ -4,8 +4,7 @@
 
 int main() {
 	opcode_t op;
-	FILE *in;
-	FILE *out = fopen("code.eva", "w");
+	FILE *f = fopen("code.eva", "wb");
 
 	printf("Create machine code:\n");
 	printf("ADD\tR0, 4\n");
@@ -14,28 +13,28 @@ int main() {
 	op.flag = 0;
 	op.offset = 0;
 	op.operands = 0x00004;
-	fwrite(&op, sizeof(opcode_t), 1, out);
+	fwrite(&op, sizeof(opcode_t), 1, f);
 
 	printf("ADD\tR1, 8\n");
 	op.operands = 0x10008;
-	fwrite(&op, sizeof(opcode_t), 1, out);
+	fwrite(&op, sizeof(opcode_t), 1, f);
 
 	printf("ADD\tR0, R1\n");
 	op.instruction = 0;
 	op.operands = 0x01000;
-	fwrite(&op, sizeof(opcode_t), 1, out);
+	fwrite(&op, sizeof(opcode_t), 1, f);
 
 	printf("PUSH\tR0\n");
 	op.instruction = 0b10;
 	op.operands = 0x00000;
-	fwrite(&op, sizeof(opcode_t), 1, out);
+	fwrite(&op, sizeof(opcode_t), 1, f);
 
-	fclose(out);
+	fclose(f);
+	f = fopen("code.eva", "rb");
 
 	printf("======= Reading from file:\n");
 
-	in = fopen("code.eva", "r");
-	while (fread(&op, sizeof(opcode_t), 1, in)) {
+	while (fread(&op, sizeof(opcode_t), 1, f)) {
 		/* printf("========\n");
 		printf("Instruction: %d\n", op.instruction);
 		printf("Reset: %d, flag: %d\n", op.reinit, op.flag);
@@ -46,6 +45,6 @@ int main() {
 		disassemble(op);
 	}
 
-	fclose(in);
+	fclose(f);
 	return 0;
 }
