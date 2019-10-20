@@ -8,7 +8,7 @@ int main() {
 	FILE *out = fopen("code.eva", "w");
 
 	printf("Create machine code:\n");
-	printf("ADD R0 4\n");
+	printf("ADD\tR0\t4\n");
 	op.instruction = 1;
 	op.reinit = 0;
 	op.flag = 0;
@@ -16,16 +16,16 @@ int main() {
 	op.operands = 0x00004;
 	fwrite(&op, sizeof(opcode_t), 1, out);
 
-	printf("ADD R1 8\n");
+	printf("ADD\tR1\t8\n");
 	op.operands = 0x10008;
 	fwrite(&op, sizeof(opcode_t), 1, out);
 
-	printf("ADD R0 R1\n");
+	printf("ADD\tR0\tR1\n");
 	op.instruction = 0;
 	op.operands = 0x01000;
 	fwrite(&op, sizeof(opcode_t), 1, out);
 
-	printf("PUSH R0\n");
+	printf("PUSH\tR0\n");
 	op.instruction = 0b10;
 	op.operands = 0x00000;
 	fwrite(&op, sizeof(opcode_t), 1, out);
@@ -43,7 +43,7 @@ int main() {
 		printf("Operand 1: %d, Operand 2: %d\n", op.operands >> 16,
 		           op.operands & 0xFFFF);
 		printf("==== Disassembly:\n"); */
-		disassemble(op, NULL, 0);
+		disassemble(op);
 	}
 
 	fclose(in);
