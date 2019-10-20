@@ -1,4 +1,6 @@
+#include "disassemble.h"
 #include "eva.h"
+#include <stdio.h>
 
 int main() {
 	opcode_t op;
@@ -30,15 +32,18 @@ int main() {
 
 	fclose(out);
 
-	printf("====================\nReading from file\n");
+	printf("======= Reading from file:\n");
 
 	in = fopen("code.eva", "r");
-	while(fread(&op, sizeof(opcode_t), 1, in)) {
-		printf("========\n");
+	while (fread(&op, sizeof(opcode_t), 1, in)) {
+		/* printf("========\n");
 		printf("Instruction: %d\n", op.instruction);
 		printf("Reset: %d, flag: %d\n", op.reinit, op.flag);
 		printf("Offset: %d\n", op.offset);
-		printf("Operand 1: %d, Operand 2: %d\n", op.operands >> 16, op.operands & 0xFFFF);
+		printf("Operand 1: %d, Operand 2: %d\n", op.operands >> 16,
+		           op.operands & 0xFFFF);
+		printf("==== Disassembly:\n"); */
+		disassemble(op, NULL, 0);
 	}
 
 	fclose(in);
