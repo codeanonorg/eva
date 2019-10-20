@@ -1,7 +1,6 @@
 {
 	"recommendations": [
 		"ms-vscode.cpptools",
-		"xaver.clang-format",
 		"llvm-vs-code-extensions.vscode-clangd",
 		"asabil.meson"
 	]
