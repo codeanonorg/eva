@@ -281,5 +281,7 @@ obj/
 # Compile commands
 compile_commands.json
 
-# Meson default build dir
+# Meson
 build/
+subprojects/
+!subprojects/*.wrap
