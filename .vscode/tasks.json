@@ -17,7 +17,8 @@
 			"type": "shell",
 			"label": "run",
 			"command": "${workspaceFolder}/build/meson-out/eva",
-			"dependsOn": "build"
+			"dependsOn": "build",
+			"problemMatcher": []
 		}
 	]
 }
