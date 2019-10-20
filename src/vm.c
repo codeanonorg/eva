@@ -8,7 +8,7 @@ int main() {
 	FILE *out = fopen("code.eva", "w");
 
 	printf("Create machine code:\n");
-	printf("ADD\tR0\t4\n");
+	printf("ADD\tR0, 4\n");
 	op.instruction = 1;
 	op.reinit = 0;
 	op.flag = 0;
@@ -16,11 +16,11 @@ int main() {
 	op.operands = 0x00004;
 	fwrite(&op, sizeof(opcode_t), 1, out);
 
-	printf("ADD\tR1\t8\n");
+	printf("ADD\tR1, 8\n");
 	op.operands = 0x10008;
 	fwrite(&op, sizeof(opcode_t), 1, out);
 
-	printf("ADD\tR0\tR1\n");
+	printf("ADD\tR0, R1\n");
 	op.instruction = 0;
 	op.operands = 0x01000;
 	fwrite(&op, sizeof(opcode_t), 1, out);
