@@ -1,1 +1,3 @@
 option('SDL', type: 'feature', value: 'auto')
+option('WITH_TESTS', type: 'boolean', value: false)
+option('WITH_DOCS', type: 'boolean', value: false)
