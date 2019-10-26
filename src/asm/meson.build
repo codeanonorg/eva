@@ -11,7 +11,8 @@ asm_exe = custom_target('asm',
 		dune_exe,
 		asm_dune_target,
 		meson.current_source_dir() / 'src',
-		meson.current_build_dir()
+		meson.current_build_dir(),
+		'@OUTPUT@'
 	],
 	input: files(
 		'src/main.ml',
@@ -19,7 +20,7 @@ asm_exe = custom_target('asm',
 		'src/parser/lexer.mll',
 		'src/parser/parser.mly'
 	),
-	output: asm_dune_target,
+	output: 'assembler',
 	install: true,
 	install_dir: get_option('bindir')
 )
