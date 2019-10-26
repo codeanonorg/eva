@@ -7,3 +7,5 @@ eva_exe = executable(meson.project_name(),
 	# dependencies: sdl_dep,
 	link_with: eva_lib,
 	install:true)
+
+subdir('asm')

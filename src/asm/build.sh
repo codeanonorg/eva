@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+DUNE_EXE=$1
+TARGET=$2
+DUNE_ROOT=$3
+MESON_BUILD_DIR=$4
+
+$DUNE_EXE build $TARGET --root=$DUNE_ROOT --build-dir=$MESON_BUILD_DIR
+cp $MESON_BUILD_DIR/_build/default/$TARGET $MESON_BUILD_DIR
