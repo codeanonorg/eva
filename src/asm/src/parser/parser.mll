@@ -47,7 +47,7 @@ rule instruction = parse
   
 
   | "ADD" blank (reg as r1) ',' blank (cst as c)
-    { 
+    {
       ADD_R_C (get_reg r1, get_cst c)
     }
 

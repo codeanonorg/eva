@@ -2,4 +2,4 @@
 
 (executable
   (name main)
-  (modules instructions lexer main))
+  (modules instructions instructions_processing parser main))

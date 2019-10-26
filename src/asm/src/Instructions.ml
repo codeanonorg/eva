@@ -1,4 +1,6 @@
-
+(**
+ * Module for Instructions types
+ *)
 
 type oper = [
   | `Reg    of int
@@ -6,7 +8,7 @@ type oper = [
   | `Label  of string
   | `Adr    of int
 ]
-
+(** Type for operands. This type is just a guideline *)
 
 type t =
   | LABEL     of [ `Label of string ]
@@ -38,7 +40,7 @@ type t =
   | PUSH_R    of [ `Reg of int ]
   (* POP R *)
   | POP_R     of [ `Reg of int ]
-
+(** Type for instructions *)
 
 let pprint instr =
   match instr with

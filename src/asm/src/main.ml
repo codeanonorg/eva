@@ -5,10 +5,10 @@ let _ =
   
   while true do
     try
-      l := !l @ [ Lexer.instruction (Lexing.from_channel stdin) ]
+      l := !l @ [ Parser.instruction (Lexing.from_channel stdin) ]
     with 
-      | Lexer.Eof     -> List.iter Instructions.pprint !l; exit 0
-      | Lexer.Error e -> print_endline e
+      | Parser.Eof     -> List.iter Instructions_processing.to_bin !l; exit 0
+      | Parser.Error e -> print_endline e
   done;
 
   
