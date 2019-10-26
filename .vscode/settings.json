@@ -6,6 +6,7 @@
 	"mesonbuild.configureOptions": [
 		"--buildtype=debug",
 		"-DSDL=disabled",
+		"-DASM=disabled",
 		"-DWITH_TESTS=true",
 		"--layout=flat"
 	]
