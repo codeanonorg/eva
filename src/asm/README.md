@@ -37,17 +37,17 @@ Les programmes sont habituellement chargés en mémoire à l'adresse #0. Toutefo
 
 ## Construction des Op-codes
 
-|         | code instruction | reset | flag   | offset | opérandes |
-|:------- | :--------------: | :---: | :----: | :----: | :-------- |
-|         | 4 bits           | 1 bit | 1 bit  | 1 bit  | 20 bits   |
-| `ADD   Rn Rm`   | 0000 | 0 | 0 | .. | n[4 bits] m[4 bits]     |
-| `ADD   Rn Val`  | 0001 | 0 | 0 | .. | n[4 bits] val[16 bits]  |
-| `ADDC  Rn Rm`   | 0000 | 0 | 1 | .. | n[4 bits] m[4 bits]     |
-| `ADDC  Rn Val`  | 0001 | 0 | 1 | .. | n[4 bits] val[16 bits]  |
-| `MOV   Rn Rm`   | 0000 | 1 | 0 | .. | n[4 bits] m[4 bits]     |
-| `MOV   Rn Val`  | 0001 | 1 | 0 | .. | n[4 bits] val[16 bits]  |
-| `PUSH  Rn`      | 0010 | 0 | 0 | 00 | n[4 bits]               |
-| `POP   Rn`      | 0010 | 1 | 0 | 00 | n[4 bits]               |
+|                | code instruction | reset | flag  | offset | opérandes              |
+| :------------- | :--------------: | :---: | :---: | :----: | :--------------------- |
+|                |      4 bits      | 1 bit | 1 bit | 2 bits | 20 bits                |
+| `ADD   Rn Rm`  |       0000       |   0   |   0   |   ..   | n[4 bits] m[4 bits]    |
+| `ADD   Rn Val` |       0001       |   0   |   0   |   ..   | n[4 bits] val[16 bits] |
+| `ADDC  Rn Rm`  |       0000       |   0   |   1   |   ..   | n[4 bits] m[4 bits]    |
+| `ADDC  Rn Val` |       0001       |   0   |   1   |   ..   | n[4 bits] val[16 bits] |
+| `MOV   Rn Rm`  |       0000       |   1   |   0   |   ..   | n[4 bits] m[4 bits]    |
+| `MOV   Rn Val` |       0001       |   1   |   0   |   ..   | n[4 bits] val[16 bits] |
+| `PUSH  Rn`     |       0010       |   0   |   0   |   00   | n[4 bits]              |
+| `POP   Rn`     |       0010       |   1   |   0   |   00   | n[4 bits]              |
 
 Les op-codes ont une taille fixée de 32 bits. Leur structure est toujours la même.
 
@@ -69,7 +69,7 @@ Les 8 premiers bits des op-codes permettent la distrinction entre les différent
 
 | offset | écriture à partir du |
 | :----: | :------------------- |
-| 00     | bit 0    |
-| 01     | bit 4    |
-| 10     | bit 8    |
-| 11     | bit 12   |
+|   00   | bit 0                |
+|   01   | bit 4                |
+|   10   | bit 8                |
+|   11   | bit 12               |
