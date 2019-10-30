@@ -33,9 +33,13 @@ let blank = (('\t')+ | (' ')+)
 let cst   = '#' ['0'-'9']+
 let label = ['a'-'z' 'A'-'Z' '_']+ ['0'-'9']* ['a'-'z' 'A'-'Z' '_']*
 
+
 rule instruction = parse
   | '\n'
     { incr_linenum lexbuf; instruction lexbuf }
+
+  | blank
+    { instruction lexbuf }
 
   | (label as l) blank* ':'
     { LABEL (`Label l) }
@@ -123,6 +127,37 @@ rule instruction = parse
       POP_R (get_reg r1)
     }
 
+
+  | "CMP"  blank (reg as r1) ',' blank (reg as r2)
+    {
+      CMP_R_R (get_reg r1, get_reg r2)
+    }
+
+
+  | "CMP"  blank (reg as r1) ',' blank (cst as c)
+    {
+      CMP_R_C (get_reg r1, get_cst c)
+    }
+
+  | "BEQ"  blank (reg as r1)
+    {
+      BEQ_R (get_reg r1)
+    }
+
+  | "BNEQ"  blank (reg as r1)
+    {
+      BNEQ_R (get_reg r1)
+    }
+
+  | "BLT"  blank (reg as r1)
+    {
+      BLT_R (get_reg r1)
+    }
+
+  | "BLE"  blank (reg as r1)
+    {
+      BLE_R (get_reg r1)
+    }
 
   | eof
     { raise Eof }

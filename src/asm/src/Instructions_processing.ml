@@ -140,36 +140,36 @@ let to_bin instr =
     in
     make_code_4_16 instr_code reset_code flag_code offset_code r1 c
 
-  | BEQ_R (`Reg r1, `Reg r2) ->
+  | BEQ_R (`Reg r1) ->
     let instr_code  = 0b1011
     and reset_code  = 0b1
     and flag_code   = 0b0
     and offset_code = 0b00
     in
-    make_code_4_4 instr_code reset_code flag_code offset_code r1 r2
+    make_code_4_4 instr_code reset_code flag_code offset_code r1 0
  
-  | BNEQ_R (`Reg r1, `Reg r2) ->
+  | BNEQ_R (`Reg r1) ->
     let instr_code  = 0b1011
     and reset_code  = 0b1
     and flag_code   = 0b1
     and offset_code = 0b00
     in
-    make_code_4_4 instr_code reset_code flag_code offset_code r1 r2
+    make_code_4_4 instr_code reset_code flag_code offset_code r1 0
 
-  | BLT_R (`Reg r1, `Reg r2) ->
+  | BLT_R (`Reg r1) ->
     let instr_code  = 0b1011
     and reset_code  = 0b1
     and flag_code   = 0b0
     and offset_code = 0b01
     in
-    make_code_4_4 instr_code reset_code flag_code offset_code r1 r2
+    make_code_4_4 instr_code reset_code flag_code offset_code r1 0
 
-  | BLE_R (`Reg r1, `Reg r2) ->
+  | BLE_R (`Reg r1) ->
     let instr_code  = 0b1011
     and reset_code  = 0b1
     and flag_code   = 0b1
     and offset_code = 0b01
     in
-    make_code_4_4 instr_code reset_code flag_code offset_code r1 r2
+    make_code_4_4 instr_code reset_code flag_code offset_code r1 0
   
   | _ -> failwith "Non compilable instruction"

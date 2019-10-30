@@ -41,10 +41,10 @@ type t =
   (* CMP R #? *)
   | CMP_R_C   of [ `Reg of int ] * [ `Cst of int ]
   (* B.. *)
-  | BEQ_R     of [ `Reg of int ] * [ `Reg of int ]
-  | BNEQ_R    of [ `Reg of int ] * [ `Reg of int ]
-  | BLT_R     of [ `Reg of int ] * [ `Reg of int ]
-  | BLE_R     of [ `Reg of int ] * [ `Reg of int ]
+  | BEQ_R     of [ `Reg of int ]
+  | BNEQ_R    of [ `Reg of int ]
+  | BLT_R     of [ `Reg of int ]
+  | BLE_R     of [ `Reg of int ]
 
   (* PUSH R *)
   | PUSH_R    of [ `Reg of int ]

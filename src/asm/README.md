@@ -48,6 +48,16 @@ Les programmes sont habituellement chargés en mémoire à l'adresse #0. Toutefo
 | `MOV   Rn Val` |       0001       |   1   |   0   |   ..   | n[4 bits] val[16 bits] |
 | `PUSH  Rn`     |       0010       |   0   |   0   |   00   | n[4 bits]              |
 | `POP   Rn`     |       0010       |   1   |   0   |   00   | n[4 bits]              |
+| `LDR   Rn [Rm]`|       0100       |   1   |   0   |   00   | n[4 bits] m[4 bits]    |
+| `LDR   Rn Val` |       0101       |   1   |   0   |   00   | n[4 bits] val[16 bits] |
+| `STR   Rn [Rm]`|       1000       |   1   |   0   |   00   | n[4 bits]              |
+| `STR   Rn Val` |       1001       |   1   |   0   |   00   | n[4 bits] val[16 bits] |
+| `CMP   Rn Rm`  |       1100       |   1   |   1   |   00   | n[4 bits] m[4 bits]    |
+| `BEQ   Rn`     |       1011       |   1   |   0   |   00   | n[4 bits]              |
+| `BNEQ  Rn`     |       1011       |   1   |   1   |   00   | n[4 bits]              |
+| `BLT   Rn`     |       1011       |   1   |   1   |   01   | n[4 bits]              |
+| `BLE   Rn`     |       1011       |   1   |   0   |   01   | n[4 bits]              |
+
 
 Les op-codes ont une taille fixée de 32 bits. Leur structure est toujours la même.
 
