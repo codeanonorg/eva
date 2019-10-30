@@ -21,9 +21,3 @@ let _ =
         exit 0
       | Parser.Error e -> print_endline e
   done
-
-
-
-  
-
-

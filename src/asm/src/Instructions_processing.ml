@@ -75,13 +75,6 @@ let to_bin instr =
     and offset_code = 0b00
     in
     make_code_4_16 instr_code reset_code flag_code offset_code r1 c
-
-  | LDR_R_AR  _ -> print_endline "not yet impl"; 0
-  | LDR_R_AL  _ -> print_endline "not yet impl"; 0
-  | LDR_R_AC  _ -> print_endline "not yet impl"; 0
-  | STR_R_AR  _ -> print_endline "not yet impl"; 0
-  | STR_R_AL  _ -> print_endline "not yet impl"; 0
-  | STR_R_AC  _ -> print_endline "not yet impl"; 0
   
   | PUSH_R (`Reg r1) ->
     let instr_code  = 0b0010
@@ -99,4 +92,36 @@ let to_bin instr =
     in
     make_code_4_16 instr_code reset_code flag_code offset_code r1 0
 
-  | LABEL     _ -> print_endline "LABEL"; 0
+  | LDR_R_AR  (`Reg r1, `Reg r2) ->
+    let instr_code  = 0b0100
+    and reset_code  = 0b0
+    and flag_code   = 0b0
+    and offset_code = 0b00
+    in
+    make_code_4_4 instr_code reset_code flag_code offset_code r1 r2
+
+  | LDR_R_AC  (`Reg r1, `Cst c) ->
+    let instr_code  = 0b0101
+    and reset_code  = 0b0
+    and flag_code   = 0b0
+    and offset_code = 0b00
+    in
+    make_code_4_16 instr_code reset_code flag_code offset_code r1 c
+
+  | STR_R_AR  (`Reg r1, `Reg r2) ->
+    let instr_code  = 0b1000
+    and reset_code  = 0b0
+    and flag_code   = 0b0
+    and offset_code = 0b00
+    in
+    make_code_4_4 instr_code reset_code flag_code offset_code r1 r2
+
+  | STR_R_AC  (`Reg r1, `Cst c) ->
+    let instr_code  = 0b1001
+    and reset_code  = 0b0
+    and flag_code   = 0b0
+    and offset_code = 0b00
+    in
+    make_code_4_16 instr_code reset_code flag_code offset_code r1 c
+
+  | _ -> falwith "Non compilable instruction"
