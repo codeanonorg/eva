@@ -1,0 +1,29 @@
+os: linux
+language: c
+addons:
+  apt:
+    packages:
+      - python3
+      - python3-pip
+      - gcc
+      - clang
+env:
+  - CC=gcc
+  - CC=clang
+
+before_script:
+  - python -m pip install ninja meson
+script:
+  - meson --buildtype=debugoptimized -DWITH_DOCS=false -DASM=disabled -DSDL=enabled build
+  - ninja -C build
+before_deploy:
+  - DESTDIR=`realpath eva` ninja -C build install
+  - export TRAVIS_FILENAME="eva-${TRAVIS_OS_NAME}-${TRAVIS_TAG}.tar.gz"
+  - tar -czvf $TRAVIS_FILENAME eva
+deploy:
+  provider: releases
+  api_key: $GITHUB_PAT
+  file: $TRAVIS_FILENAME
+  on:
+    tags: true
+  skip_cleanup: true
