@@ -12,7 +12,7 @@ env:
   - CC=clang
 
 before_script:
-  - python -m pip install ninja meson
+  - python3 -m pip install ninja meson
 script:
   - meson --buildtype=debugoptimized -DWITH_DOCS=false -DASM=disabled -DSDL=enabled build
   - ninja -C build
