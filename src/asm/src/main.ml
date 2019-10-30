@@ -16,7 +16,7 @@ let _ =
     try
       l := !l @ [ Parser.instruction (Lexing.from_channel stdin) ]
     with 
-      | Parser.Eof     -> 
+      | Parser.Eof     ->
         List.iter (fun x -> Instructions_processing.to_bin x |> write_to_file oc) !l;
         exit 0
       | Parser.Error e -> print_endline e

@@ -99,7 +99,7 @@ rule instruction = parse
 
   
   | "STR" blank (reg as r1) ',' blank '[' (reg as r2) ']'
-    { 
+    {
       STR_R_AR (get_reg r1, get_reg r2)
     }
 
