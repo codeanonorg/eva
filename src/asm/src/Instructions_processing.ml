@@ -100,7 +100,7 @@ let to_bin instr =
     in
     make_code_4_4 instr_code reset_code flag_code offset_code r1 r2
 
-  | LDR_R_AC  (`Reg r1, `Cst c) ->
+  | LDR_R_AC  (`Reg r1, `Adr c) ->
     let instr_code  = 0b0101
     and reset_code  = 0b0
     and flag_code   = 0b0
@@ -116,7 +116,7 @@ let to_bin instr =
     in
     make_code_4_4 instr_code reset_code flag_code offset_code r1 r2
 
-  | STR_R_AC  (`Reg r1, `Cst c) ->
+  | STR_R_AC  (`Reg r1, `Adr c) ->
     let instr_code  = 0b1001
     and reset_code  = 0b0
     and flag_code   = 0b0
@@ -124,4 +124,52 @@ let to_bin instr =
     in
     make_code_4_16 instr_code reset_code flag_code offset_code r1 c
 
-  | _ -> falwith "Non compilable instruction"
+  | CMP_R_R (`Reg r1, `Reg r2) ->
+    let instr_code  = 0b1100
+    and reset_code  = 0b1
+    and flag_code   = 0b1
+    and offset_code = 0b00
+    in
+    make_code_4_4 instr_code reset_code flag_code offset_code r1 r2
+
+  | CMP_R_C (`Reg r1, `Cst c) ->
+    let instr_code  = 0b1100
+    and reset_code  = 0b1
+    and flag_code   = 0b1
+    and offset_code = 0b01
+    in
+    make_code_4_16 instr_code reset_code flag_code offset_code r1 c
+
+  | BEQ_R (`Reg r1, `Reg r2) ->
+    let instr_code  = 0b1011
+    and reset_code  = 0b1
+    and flag_code   = 0b0
+    and offset_code = 0b00
+    in
+    make_code_4_4 instr_code reset_code flag_code offset_code r1 r2
+ 
+  | BNEQ_R (`Reg r1, `Reg r2) ->
+    let instr_code  = 0b1011
+    and reset_code  = 0b1
+    and flag_code   = 0b1
+    and offset_code = 0b00
+    in
+    make_code_4_4 instr_code reset_code flag_code offset_code r1 r2
+
+  | BLT_R (`Reg r1, `Reg r2) ->
+    let instr_code  = 0b1011
+    and reset_code  = 0b1
+    and flag_code   = 0b0
+    and offset_code = 0b01
+    in
+    make_code_4_4 instr_code reset_code flag_code offset_code r1 r2
+
+  | BLE_R (`Reg r1, `Reg r2) ->
+    let instr_code  = 0b1011
+    and reset_code  = 0b1
+    and flag_code   = 0b1
+    and offset_code = 0b01
+    in
+    make_code_4_4 instr_code reset_code flag_code offset_code r1 r2
+  
+  | _ -> failwith "Non compilable instruction"

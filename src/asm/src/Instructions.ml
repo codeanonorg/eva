@@ -36,11 +36,22 @@ type t =
   | STR_R_AC  of [ `Reg of int ] * [ `Adr of int ]
   (* STR R tag *)
   | STR_R_AL  of [ `Reg of int ] * [ `Label of string ]
+  (* CMP R R *)
+  | CMP_R_R   of [ `Reg of int ] * [ `Reg of int ]
+  (* CMP R #? *)
+  | CMP_R_C   of [ `Reg of int ] * [ `Cst of int ]
+  (* B.. *)
+  | BEQ_R     of [ `Reg of int ] * [ `Reg of int ]
+  | BNEQ_R    of [ `Reg of int ] * [ `Reg of int ]
+  | BLT_R     of [ `Reg of int ] * [ `Reg of int ]
+  | BLE_R     of [ `Reg of int ] * [ `Reg of int ]
+
   (* PUSH R *)
   | PUSH_R    of [ `Reg of int ]
   (* POP R *)
   | POP_R     of [ `Reg of int ]
 (** Type for instructions *)
+
 
 let pprint instr =
   match instr with
@@ -56,6 +67,12 @@ let pprint instr =
   | STR_R_AR  _ -> print_endline "STR"
   | STR_R_AL  _ -> print_endline "STR"
   | STR_R_AC  _ -> print_endline "STR"
+  | CMP_R_C   _ -> print_endline "CMP"
+  | CMP_R_R   _ -> print_endline "CMP"
+  | BEQ_R     _ -> print_endline "BEQ"
+  | BNEQ_R    _ -> print_endline "BNEQ"
+  | BLT_R     _ -> print_endline "BLT"
+  | BLE_R     _ -> print_endline "BLE"
   | PUSH_R    _ -> print_endline "PUSH"
   | POP_R     _ -> print_endline "POP"
   | LABEL     _ -> print_endline "LABEL"
