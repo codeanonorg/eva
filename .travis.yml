@@ -4,7 +4,7 @@ language: python
 python: "3.6"
 addons:
   apt:
-    repositories:
+    sources:
       - ppa:avsm/ppa
     packages:
       - libx11-dev
@@ -14,8 +14,8 @@ addons:
       - gcc
       - clang
 env:
-  - CC=gcc
-  - CC=clang
+  - CC=gcc MESONARGS="-DASM=enabled"
+  - CC=clang MESONARGS="-DASM=disabled"
 
 before_script:
   - pip install ninja meson
@@ -23,7 +23,7 @@ before_script:
   - opam switch create 4.09.0
   - eval `opam env`
 script:
-  - meson --buildtype=debugoptimized -DWITH_DOCS=false -DASM=enabled -DSDL=enabled build
+  - meson --buildtype=debugoptimized -DWITH_DOCS=false ${MESONARGS} -DSDL=enabled build
   - ninja -C build
 before_deploy:
   - DESTDIR=`realpath eva` ninja -C build install
