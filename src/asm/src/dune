@@ -2,4 +2,5 @@
 
 (executable
   (name main)
+  (libraries core)
   (modules instructions instructions_processing parser main))
