@@ -5,6 +5,8 @@ python: "3.6"
 addons:
   apt:
     packages:
+      - libx11-dev
+      - libxi-dev
       - build-essential
       - gcc
       - clang
