@@ -4,10 +4,13 @@ language: python
 python: "3.6"
 addons:
   apt:
+    repositories:
+      - ppa:avsm/ppa
     packages:
       - libx11-dev
       - libxi-dev
       - build-essential
+      - opam
       - gcc
       - clang
 env:
@@ -16,8 +19,11 @@ env:
 
 before_script:
   - pip install ninja meson
+  - opam init
+  - opam switch create 4.09.0
+  - eval `opam env`
 script:
-  - meson --buildtype=debugoptimized -DWITH_DOCS=false -DASM=disabled -DSDL=enabled build
+  - meson --buildtype=debugoptimized -DWITH_DOCS=false -DASM=enabled -DSDL=enabled build
   - ninja -C build
 before_deploy:
   - DESTDIR=`realpath eva` ninja -C build install
