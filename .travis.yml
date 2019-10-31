@@ -11,6 +11,7 @@ addons:
       - libxi-dev
       - build-essential
       - opam
+      - ocaml
       - gcc
       - clang
 env:
@@ -19,7 +20,7 @@ env:
 
 before_script:
   - pip install ninja meson
-  - opam init --comp 4.08.0
+  - opam init
   - opam switch create 4.09.0
   - eval `opam env`
 script:
