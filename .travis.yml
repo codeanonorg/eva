@@ -1,0 +1,39 @@
+os: linux
+dist: bionic
+language: python
+python: "3.6"
+addons:
+  apt:
+    sources:
+      - ppa:avsm/ppa
+    packages:
+      - libx11-dev
+      - libxi-dev
+      - build-essential
+      - opam
+      - ocaml
+      - gcc
+      - clang
+env:
+  - CC=gcc MESONARGS="-DASM=enabled"
+  - CC=clang MESONARGS="-DASM=disabled"
+
+before_script:
+  - pip install ninja meson
+  - y | opam init
+  - opam switch create 4.09.0
+  - eval `opam env`
+script:
+  - meson --buildtype=debugoptimized -DWITH_DOCS=false ${MESONARGS} -DSDL=enabled build
+  - ninja -C build
+before_deploy:
+  - DESTDIR=`realpath eva` ninja -C build install
+  - export TRAVIS_FILENAME="eva-${TRAVIS_OS_NAME}-${TRAVIS_TAG}.tar.gz"
+  - tar -czvf $TRAVIS_FILENAME eva
+deploy:
+  provider: releases
+  api_key: $GITHUB_PAT
+  file: $TRAVIS_FILENAME
+  on:
+    tags: true
+  skip_cleanup: true
