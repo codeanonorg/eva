@@ -20,7 +20,7 @@ env:
 
 before_script:
   - pip install ninja meson
-  - opam init
+  - y | opam init
   - opam switch create 4.09.0
   - eval `opam env`
 script:
